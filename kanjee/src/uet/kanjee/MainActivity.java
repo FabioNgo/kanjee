@@ -1,5 +1,12 @@
 package uet.kanjee;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -9,19 +16,32 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 import android.os.Build;
 
 public class MainActivity extends ActionBarActivity {
-
+	DatabaseHelper db;
+	static final String DB_NAME = "kanjee.sqlt";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		if (savedInstanceState == null) {
-			getSupportFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
+		
+		try {
+			db = new DatabaseHelper(getApplicationContext());
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
 		}
+		
+		ArrayList<KCharacter> chars = (ArrayList<KCharacter>) db.getAllChars();
+		
+		TextView tv = (TextView)findViewById(R.id.textView1);
+		
+		tv.setText(String.valueOf(chars.size()));
 	}
 
 	@Override
@@ -43,22 +63,31 @@ public class MainActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	private void copyDatabase() throws IOException {
+		// TODO Auto-generated method stub
+		InputStream myinput = getAssets().open(DB_NAME);
 
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
+		// Path to the just created empty db
 
-		public PlaceholderFragment() {
+		// Open the empty db as the output stream
+		File outputFile = new File(
+				getExternalFilesDir(ACCESSIBILITY_SERVICE),DB_NAME);
+		OutputStream output = new FileOutputStream(outputFile);
+
+		// transfer byte to inputfile to outputfile
+		byte[] buffer = new byte[1024];
+		int length;
+		while ((length = myinput.read(buffer)) > 0) {
+			output.write(buffer, 0, length);
 		}
 
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main, container,
-					false);
-			return rootView;
-		}
+		// Close the streams
+		output.flush();
+		output.close();
+		myinput.close();
+
 	}
+	
+	
 
 }
