@@ -104,8 +104,8 @@ public class MainActivity extends Activity implements OnClickListener{
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.imageView1:
-//			Intent i = new Intent(this, Menu1FragmentActivity.class);
-//			startActivity(i); 
+			Intent i = new Intent(this, Menu1FragmentActivity.class);
+			startActivity(i); 
 			break;
 
 		default:
