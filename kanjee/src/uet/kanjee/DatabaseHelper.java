@@ -138,13 +138,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			// looping through all rows and adding to list
 			if (cursor.moveToFirst()) {
 				do {
-//					KRadical radical = new KRadical(
-//							cursor.getInt(cursor.getColumnIndex("ID")),
-//							cursor.getInt(cursor.getColumnIndex("NUMSTROKES")),
-//							cursor.getBlob(cursor.getColumnIndex("IMAGE")) 
-//							);
-					// adding to tags list
-//					radicals.add(radical);
+					KRadical radical = new KRadical(
+							cursor.getString(cursor.getColumnIndex("ID")),
+							cursor.getInt(cursor.getColumnIndex("NUMSTROKES")),
+							cursor.getBlob(cursor.getColumnIndex("IMAGE")) 
+							);
+					 //adding to tags list
+					radicals.add(radical);
 				} while (cursor.moveToNext());
 			}
 		}
@@ -166,12 +166,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		// looping through all rows and adding to list
 		if (cursor.moveToFirst()) {
 			do {
-//				KRadical tempRadical = new KRadical(cursor.getInt(cursor
-//						.getColumnIndex("ID")), cursor.getInt(cursor
-//						.getColumnIndex("NUMSTROKES")), cursor.getBlob(cursor
-//						.getColumnIndex("IMAGE")));
-				// adding to tags list
-//				radicals.add(tempRadical);
+				KRadical tempRadical = new KRadical(cursor.getString(cursor
+						.getColumnIndex("ID")), cursor.getInt(cursor
+						.getColumnIndex("NUMSTROKES")), cursor.getBlob(cursor
+						.getColumnIndex("IMAGE")));
+				 
+				radicals.add(tempRadical);
 			} while (cursor.moveToNext());
 		}
 		return radicals;
