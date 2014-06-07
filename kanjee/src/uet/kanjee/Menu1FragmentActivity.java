@@ -30,7 +30,6 @@ public class Menu1FragmentActivity extends FragmentActivity implements
 	public static Menu1FragmentActivity getInstance(){
 		if (instance == null) {
 			instance = new Menu1FragmentActivity();
-			Log.e("","sssss");
 		}
 		return instance;
 	}

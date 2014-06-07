@@ -1,18 +1,13 @@
 package uet.kanjee;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Color;
-import android.os.Build;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -21,7 +16,7 @@ import android.widget.TextView;
 public class HorzGridViewAdapter extends BaseAdapter{
 	
 	private Context mContext;
-	private List<Model> data;	
+	private ArrayList<KRadical> data;	
 	
 	//HorzGridView stuff
 	private int columns;//Used to set childSize in TwoWayGridView
@@ -30,7 +25,7 @@ public class HorzGridViewAdapter extends BaseAdapter{
 	private int columnWidth;
 	private int rowHeight;
 
-	public HorzGridViewAdapter(Context context,List<Model> data){
+	public HorzGridViewAdapter(Context context,ArrayList<KRadical> data){
 		this.mContext = context;
 		this.data = data;
 
@@ -43,10 +38,11 @@ public class HorzGridViewAdapter extends BaseAdapter{
 	}
 
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		//Get the data for the given position in the array
-		Model thisData = data.get(position);
+		KRadical thisData = data.get(position);
 		
 		//Use a viewHandler to improve performance
 		ViewHandler handler;
@@ -72,11 +68,10 @@ public class HorzGridViewAdapter extends BaseAdapter{
 //		handler.iv.setBackgroundColor(thisData.getColor());
 		
 		
-		handler.iv.setImageResource(thisData.getResourceImageId());
-		handler.iv.setBackgroundColor(Color.BLACK);
-		handler.tv.setText(thisData.getName());
-		if(!thisData.isACTIVE()){
-			handler.iv.getBackground().setAlpha(128);
+		handler.iv.setImageResource(thisData.getImagePath());
+		handler.tv.setText(thisData.getId());
+		if(!thisData.isOnFocus()){
+			handler.iv.setAlpha(90);
 		}
 		FrameLayout.LayoutParams lp 
 			= new FrameLayout.LayoutParams(columnWidth, rowHeight);// convertView.getLayoutParams();
@@ -98,7 +93,7 @@ public class HorzGridViewAdapter extends BaseAdapter{
 	}
 
 	@Override
-	public Model getItem(int position) {
+	public KRadical getItem(int position) {
 		
 		return data.get(position);
 	}

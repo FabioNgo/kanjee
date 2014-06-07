@@ -40,7 +40,7 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 		
 		// Create the data for use in the vert gridview-same data will be passed
 		// to horz gridview
-		final List<Model> horzData = generateGridViewObjects();
+		final ArrayList<KRadical> horzData = generateGridViewObjects();
 
 		// Create the adapters for the gridviews
 		horzGridViewAdapter = new HorzGridViewAdapter(mContext, horzData);
@@ -55,9 +55,12 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 					int position, long id) {
 				Toast.makeText(mContext, "clicked " + position,
 						Toast.LENGTH_SHORT).show();
-				for(int i=0;i<horzData.get(position).cacchulienquan.size();i++){
-					horzData.get(position).cacchulienquan.get(i).setACTIVE(false);
-					Log.e("",horzData.get(position).cacchulienquan.get(i).getName()+"");
+				for(int i=0;i<horzData.size();i++){
+					if(!horzData.get(position).getRelatedRadicals().contains(horzData.get(i))){
+//						Log.e("",horzData.get(i).getId());
+						horzData.get(i).setOnFocus(false);
+//					Log.e("",horzData.get(position).getRelatedRadicals().get(i).getId()+"");
+					}
 				}
 				horzGridView.invalidateViews();
 			}
@@ -92,9 +95,9 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 
 	}
 
-	private List<Model> generateGridViewObjects() {
+	private ArrayList<KRadical> generateGridViewObjects() {
 
-		List<Model> allData = new ArrayList<Model>();
+		ArrayList<KRadical> allData = new ArrayList<KRadical>();
 
 		String name;
 		int color;
@@ -114,33 +117,34 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 			color = Color.argb(255, red, green, blue);
 			name =  ""+i;
 
-			Model singleObject = new Model(name, color);
+			KRadical singleObject = new KRadical(name, color);
 			allData.add(singleObject);
 		}
 
-		allData.get(0).setResourceImageId(R.drawable.a1);
-		allData.get(1).setResourceImageId(R.drawable.a11);
-		allData.get(2).setResourceImageId(R.drawable.a12);
-		allData.get(3).setResourceImageId(R.drawable.a13);
-		allData.get(4).setResourceImageId(R.drawable.a14);
-		allData.get(5).setResourceImageId(R.drawable.a15);
-		allData.get(6).setResourceImageId(R.drawable.a16);
-		allData.get(8).setResourceImageId(R.drawable.a2);
-		allData.get(9).setResourceImageId(R.drawable.a21);
-		allData.get(10).setResourceImageId(R.drawable.a22);
-		allData.get(11).setResourceImageId(R.drawable.a23);
-		allData.get(12).setResourceImageId(R.drawable.a24);
-		allData.get(13).setResourceImageId(R.drawable.a25);
-		allData.get(14).setResourceImageId(R.drawable.a26);
-		allData.get(16).setResourceImageId(R.drawable.a3);
-		allData.get(24).setResourceImageId(R.drawable.a4);
-		allData.get(25).setResourceImageId(R.drawable.a41);
-		allData.get(32).setResourceImageId(R.drawable.a5);
-		allData.get(33).setResourceImageId(R.drawable.a51);
-		allData.get(34).setResourceImageId(R.drawable.a52);
-		allData.get(33).cacchulienquan.add(allData.get(4));
-		allData.get(33).cacchulienquan.add(allData.get(10));
-		allData.get(34).setACTIVE(false);
+		allData.get(0).setImagePath(R.drawable.a1);
+		allData.get(1).setImagePath(R.drawable.a11);
+		allData.get(2).setImagePath(R.drawable.a12);
+		allData.get(3).setImagePath(R.drawable.a13);
+		allData.get(4).setImagePath(R.drawable.a14);
+		allData.get(5).setImagePath(R.drawable.a15);
+		allData.get(6).setImagePath(R.drawable.a16);
+		allData.get(8).setImagePath(R.drawable.a2);
+		allData.get(9).setImagePath(R.drawable.a21);
+		allData.get(10).setImagePath(R.drawable.a22);
+		allData.get(11).setImagePath(R.drawable.a23);
+		allData.get(12).setImagePath(R.drawable.a24);
+		allData.get(13).setImagePath(R.drawable.a25);
+		allData.get(14).setImagePath(R.drawable.a26);
+		allData.get(16).setImagePath(R.drawable.a3);
+		allData.get(24).setImagePath(R.drawable.a4);
+		allData.get(25).setImagePath(R.drawable.a41);
+		allData.get(32).setImagePath(R.drawable.a5);
+		allData.get(33).setImagePath(R.drawable.a51);
+		allData.get(34).setImagePath(R.drawable.a52);
+		allData.get(33).getRelatedRadicals().add(allData.get(4));
+		allData.get(33).getRelatedRadicals().add(allData.get(10));
+		allData.get(33).getRelatedRadicals().add(allData.get(25));
+		allData.get(33).getRelatedRadicals().add(allData.get(34));
 		return allData;
 	}
 }
