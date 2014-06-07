@@ -7,12 +7,14 @@ public class KRadical {
 	private int numStrokes;
 	private String imagePath;
 	private ArrayList<KCharacter> relatedCharacters;
+	private ArrayList<KRadical> relatedRadicals;
 	public KRadical() {
 		// TODO Auto-generated constructor stub
 		setId(-1);
 		setNumStrokes(-1);
 		setImagePath("");
 		setRelatedCharacters(new ArrayList<KCharacter>());
+		setRelatedRadicals(new ArrayList<KRadical>());
 	}
 	public KRadical(int id, int numStrokes, String imagePath){
 		this.setId(id);
@@ -66,6 +68,12 @@ public class KRadical {
 	 */
 	public void setRelatedCharacters(ArrayList<KCharacter> relatedCharacters) {
 		this.relatedCharacters = relatedCharacters;
+	}
+	public ArrayList<KRadical> getRelatedRadicals() {
+		return relatedRadicals;
+	}
+	public void setRelatedRadicals(ArrayList<KRadical> relatedRadicals) {
+		this.relatedRadicals = relatedRadicals;
 	}
 	
 

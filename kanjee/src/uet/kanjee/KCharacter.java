@@ -9,7 +9,8 @@ public class KCharacter {
 	private String pinyin;
 	private String meaning;
 	private String other;
-	private ArrayList<KRadical> relatedRadicals;
+
+	private ArrayList<KRadical> relatedRadicals; // cai nay phai la "cac radical tao thanh character nay" chu nhi?
 	public KCharacter(){
 		setId(-1);
 		setNumStrokes(-1);
