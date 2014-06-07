@@ -19,7 +19,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.os.Build;
-
+/**
+ * Thay doi code o day
+ * @author Huy
+ *
+ */
 public class MainActivity extends ActionBarActivity {
 	DatabaseHelper db;
 	static final String DB_NAME = "kanjee.sqlt";
