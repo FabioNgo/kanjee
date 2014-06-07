@@ -4,20 +4,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <com.jess.ui.TwoWayGridView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/horz_gridview"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-	    android:background="#E8E8E8"
-	    app:cacheColorHint="#E8E8E8"
-	    app:verticalSpacing="0dp"
-	    app:horizontalSpacing="0dp"
-	    app:stretchMode="none"
-	    app:scrollDirectionPortrait="horizontal"
-	    app:scrollDirectionLandscape="horizontal"
-	    app:gravity="center"
-	    android:layout_gravity="center"/>
+<!--     <com.jess.ui.TwoWayGridView -->
+<!--         xmlns:app="http://schemas.android.com/apk/res-auto" -->
+<!--         android:id="@+id/horz_gridview" -->
+<!--         android:layout_width="match_parent" -->
+<!--         android:layout_height="0dp" -->
+<!--         android:layout_weight="1" -->
+<!-- 	    android:background="#E8E8E8" -->
+<!-- 	    app:cacheColorHint="#E8E8E8" -->
+<!-- 	    app:verticalSpacing="0dp" -->
+<!-- 	    app:horizontalSpacing="0dp" -->
+<!-- 	    app:stretchMode="none" -->
+<!-- 	    app:scrollDirectionPortrait="horizontal" -->
+<!-- 	    app:scrollDirectionLandscape="horizontal" -->
+<!-- 	    app:gravity="center" -->
+<!-- 	    android:layout_gravity="center"/> -->
 
 </LinearLayout>

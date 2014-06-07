@@ -39,15 +39,15 @@ public class MainActivity extends Activity implements OnClickListener{
 		im1 = (ImageView) findViewById(R.id.imageView1);
 		im1.setOnClickListener(this);
 		
-		try {
-			db = new DatabaseHelper(getApplicationContext());
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
-		}
+//		try {
+//			db = new DatabaseHelper(getApplicationContext());
+//			
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+//		}
 		
-		ArrayList<KCharacter> chars = (ArrayList<KCharacter>) db.getAllChars();
+//		ArrayList<KCharacter> chars = (ArrayList<KCharacter>) db.getAllChars();
 		
 	}
 
@@ -104,8 +104,8 @@ public class MainActivity extends Activity implements OnClickListener{
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.imageView1:
-			Intent i = new Intent(this, Menu1FragmentActivity.class);
-			startActivity(i); 
+//			Intent i = new Intent(this, Menu1FragmentActivity.class);
+//			startActivity(i); 
 			break;
 
 		default:
