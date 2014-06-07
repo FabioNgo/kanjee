@@ -2,43 +2,41 @@ package uet.kanjee;
 
 import java.util.ArrayList;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+
 public class KRadical {
-	private String id;
-	private int color;
-	private boolean onFocus;
+	private int id;
 	private int numStrokes;
-	private int imagePath;
+	private Bitmap image;
 	private ArrayList<KCharacter> relatedCharacters;
 	private ArrayList<KRadical> relatedRadicals;
-	
 	public KRadical() {
 		// TODO Auto-generated constructor stub
-		setId("-1");
+		setId(-1);
 		setNumStrokes(-1);
-		onFocus=true;
-		setImagePath(0);
+		setImage(null);
 		setRelatedCharacters(new ArrayList<KCharacter>());
 		setRelatedRadicals(new ArrayList<KRadical>());
 	}
-	
-	public KRadical(String id, int color) {
-		this.id = id;
-		this.color = color;
-		onFocus=true;
-		setRelatedCharacters(new ArrayList<KCharacter>());
-		setRelatedRadicals(new ArrayList<KRadical>());
+	public KRadical(int id, int numStrokes, byte[] image){
+		this.setId(id);
+		this.setNumStrokes(numStrokes);
+		
+		this.setImage(BitmapFactory.decodeByteArray(image, 0, image.length)); 
 	}
-
 	/**
 	 * @return the id
 	 */
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	/**
@@ -53,18 +51,8 @@ public class KRadical {
 	public void setNumStrokes(int numStrokes) {
 		this.numStrokes = numStrokes;
 	}
-	/**
-	 * @return the imagePath
-	 */
-	public int getImagePath() {
-		return imagePath;
-	}
-	/**
-	 * @param imagePath the imagePath to set
-	 */
-	public void setImagePath(int imagePath) {
-		this.imagePath = imagePath;
-	}
+	
+	
 	/**
 	 * @return the relatedCharacters
 	 */
@@ -83,11 +71,24 @@ public class KRadical {
 	public void setRelatedRadicals(ArrayList<KRadical> relatedRadicals) {
 		this.relatedRadicals = relatedRadicals;
 	}
-	public boolean isOnFocus() {
-		return onFocus;
+	/**
+	 * @return the image
+	 */
+	public Bitmap getImage() {
+		return image;
 	}
-	public void setOnFocus(boolean onFocus) {
-		this.onFocus = onFocus;
+	/**
+	 * @param image the image to set
+	 */
+	public void setImage(Bitmap image) {
+		this.image = image;
+	}
+	public void scaleBitmap(int percent){
+		image = Bitmap.createScaledBitmap(
+				image,
+				(int)(image.getHeight()*percent/100.0),
+				(int)(image.getWidth()*percent/100.0),
+				true);
 	}
 	
 
