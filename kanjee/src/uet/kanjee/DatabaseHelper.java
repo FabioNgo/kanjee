@@ -80,7 +80,102 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		}
 		return chars;
 	}
-
+	/**
+	 * 
+	 * @return the array of all characters in database
+	 */
+	public List<KRadical> getAllRadicals() {
+		List<KRadical> radicals = new ArrayList<KRadical>();
+		String selectQuery = "SELECT  * FROM " + "RADICALS";
+		Cursor c = myDatabase.rawQuery(selectQuery, null);
+		// looping through all rows and adding to list
+		if (c.moveToFirst()) {
+			int a = 0;
+//			do {
+//				KRadical radical = new KRadical(
+//						c.getInt(c.getColumnIndex("ID")),
+//						c.getInt(c.getColumnIndex("NUMSTROKES")),
+//						c.getBlob(c.getColumnIndex("IMAGE")) 
+//						);
+//				// adding to tags list
+//				radicals.add(radical);
+//			} while (c.moveToNext());
+		}
+		return radicals;
+	}
+	/**
+	 * 
+	 * @return the array of all characters in database
+	 */
+	public List<KRadical> getRelatedRadicals(KCharacter character) {
+		List<Integer> relatedRadicalsIds = new ArrayList<Integer>();
+		List<KRadical> radicals = new ArrayList<KRadical>();
+		/**
+		 * get all ID of related Radicals
+		 */
+		String selectQuery = "SELECT * FROM `RADICALS_CHARS_REL` WHERE `RAD_ID` LIKE '" 
+		+ String.valueOf(character.getId())
+		+ "' ORDER BY `ID`;";
+		Cursor c = myDatabase.rawQuery(selectQuery, null);
+		// looping through all rows and adding to list
+		if (c.moveToFirst()) {
+			do {
+				Integer id = Integer.valueOf(c.getInt(c.getColumnIndex("RAD_ID")));
+				// adding to tags list
+				relatedRadicalsIds.add(id);
+			} while (c.moveToNext());
+		}
+		/**
+		 * get information of related Radicals
+		 */
+		
+		for(int i=0; i<relatedRadicalsIds.size();i++ ){
+			
+			String query = "SELECT * FROM `RADICALS` WHERE `ID` LIKE '" 
+					+ String.valueOf(relatedRadicalsIds.get(i))
+					+ ";";
+			Cursor cursor = myDatabase.rawQuery(query, null);
+			// looping through all rows and adding to list
+			if (cursor.moveToFirst()) {
+				do {
+//					KRadical radical = new KRadical(
+//							cursor.getInt(cursor.getColumnIndex("ID")),
+//							cursor.getInt(cursor.getColumnIndex("NUMSTROKES")),
+//							cursor.getBlob(cursor.getColumnIndex("IMAGE")) 
+//							);
+					// adding to tags list
+					radicals.add(radical);
+				} while (cursor.moveToNext());
+			}
+		}
+		return radicals;
+	}
+	/**
+	 * Get Related Radicals with the same numStrokes
+	 * @param character
+	 * @return
+	 */
+	public List<KRadical> getRelatedRadicals(KRadical radical) {
+		List<KRadical> radicals = new ArrayList<KRadical>();
+		/**
+		 * get information of related Radicals
+		 */
+		String query = "SELECT * FROM `RADICALS` WHERE `NUMSTROKE` LIKE '"
+				+ String.valueOf(radical.getNumStrokes()) + ";";
+		Cursor cursor = myDatabase.rawQuery(query, null);
+		// looping through all rows and adding to list
+		if (cursor.moveToFirst()) {
+			do {
+				KRadical tempRadical = new KRadical(cursor.getInt(cursor
+						.getColumnIndex("ID")), cursor.getInt(cursor
+						.getColumnIndex("NUMSTROKES")), cursor.getBlob(cursor
+						.getColumnIndex("IMAGE")));
+				// adding to tags list
+				radicals.add(tempRadical);
+			} while (cursor.moveToNext());
+		}
+		return radicals;
+	}
 	/*
 	 * (non-Javadoc)
 	 * 
