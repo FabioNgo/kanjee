@@ -1,7 +1,6 @@
 package uet.kanjee;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import android.annotation.SuppressLint;
@@ -9,13 +8,14 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.jess.ui.TwoWayAdapterView;
@@ -55,6 +55,8 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 					int position, long id) {
 				Toast.makeText(mContext, "clicked " + position,
 						Toast.LENGTH_SHORT).show();
+				
+				horzData.get(position).setOnSelect(true);
 				for(int i=0;i<horzData.size();i++){
 					if(!horzData.get(position).getRelatedRadicals().contains(horzData.get(i))){
 //						Log.e("",horzData.get(i).getId());
@@ -62,6 +64,7 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 //					Log.e("",horzData.get(position).getRelatedRadicals().get(i).getId()+"");
 					}
 				}
+				horzData.get(position).setOnFocus(true);
 				horzGridView.invalidateViews();
 			}
 		});
@@ -82,6 +85,7 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 	            	horzGridViewAdapter.setRowHeight(newrowh);
 
 	            	horzGridView.invalidateViews();
+	            	
 	                horzGridView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 	            }
 	        });

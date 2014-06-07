@@ -6,6 +6,7 @@ public class KRadical {
 	private String id;
 	private int color;
 	private boolean onFocus;
+	private boolean onSelect;
 	private int numStrokes;
 	private int imagePath;
 	private ArrayList<KCharacter> relatedCharacters;
@@ -15,6 +16,7 @@ public class KRadical {
 		// TODO Auto-generated constructor stub
 		setId("-1");
 		setNumStrokes(-1);
+		onSelect=false;
 		onFocus=true;
 		setImagePath(0);
 		setRelatedCharacters(new ArrayList<KCharacter>());
@@ -24,6 +26,7 @@ public class KRadical {
 	public KRadical(String id, int color) {
 		this.id = id;
 		this.color = color;
+		onSelect=false;
 		onFocus=true;
 		setRelatedCharacters(new ArrayList<KCharacter>());
 		setRelatedRadicals(new ArrayList<KRadical>());
@@ -88,6 +91,14 @@ public class KRadical {
 	}
 	public void setOnFocus(boolean onFocus) {
 		this.onFocus = onFocus;
+	}
+
+	public boolean isOnSelect() {
+		return onSelect;
+	}
+
+	public void setOnSelect(boolean onSelect) {
+		this.onSelect = onSelect;
 	}
 	
 

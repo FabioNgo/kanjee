@@ -3,8 +3,13 @@ package uet.kanjee;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.jess.ui.TwoWayAdapterView;
+import com.jess.ui.TwoWayAdapterView.OnItemClickListener;
+
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +18,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class HorzGridViewAdapter extends BaseAdapter{
+public class HorzGridViewAdapter extends BaseAdapter  {
 	
 	private Context mContext;
 	private ArrayList<KRadical> data;	
@@ -72,6 +77,9 @@ public class HorzGridViewAdapter extends BaseAdapter{
 		handler.tv.setText(thisData.getId());
 		if(!thisData.isOnFocus()){
 			handler.iv.setAlpha(90);
+		}
+		if(thisData.isOnSelect()){
+			handler.iv.setColorFilter(Color.rgb(254, 255, 113),PorterDuff.Mode.MULTIPLY);
 		}
 		FrameLayout.LayoutParams lp 
 			= new FrameLayout.LayoutParams(columnWidth, rowHeight);// convertView.getLayoutParams();
