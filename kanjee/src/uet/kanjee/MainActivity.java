@@ -63,6 +63,11 @@ public class MainActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	/**
+	 * copy database file from assets to storage
+	 * @throws IOException
+	 */
 	private void copyDatabase() throws IOException {
 		// TODO Auto-generated method stub
 		InputStream myinput = getAssets().open(DB_NAME);
