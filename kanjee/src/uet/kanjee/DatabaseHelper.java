@@ -144,7 +144,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //							cursor.getBlob(cursor.getColumnIndex("IMAGE")) 
 //							);
 					// adding to tags list
-					radicals.add(radical);
+//					radicals.add(radical);
 				} while (cursor.moveToNext());
 			}
 		}
@@ -166,12 +166,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		// looping through all rows and adding to list
 		if (cursor.moveToFirst()) {
 			do {
-				KRadical tempRadical = new KRadical(cursor.getInt(cursor
-						.getColumnIndex("ID")), cursor.getInt(cursor
-						.getColumnIndex("NUMSTROKES")), cursor.getBlob(cursor
-						.getColumnIndex("IMAGE")));
+//				KRadical tempRadical = new KRadical(cursor.getInt(cursor
+//						.getColumnIndex("ID")), cursor.getInt(cursor
+//						.getColumnIndex("NUMSTROKES")), cursor.getBlob(cursor
+//						.getColumnIndex("IMAGE")));
 				// adding to tags list
-				radicals.add(tempRadical);
+//				radicals.add(tempRadical);
 			} while (cursor.moveToNext());
 		}
 		return radicals;
