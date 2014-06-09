@@ -86,20 +86,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	 */
 	public List<KRadical> getAllRadicals() {
 		List<KRadical> radicals = new ArrayList<KRadical>();
-		String selectQuery = "SELECT  * FROM " + "RADICALS";
+		String selectQuery = "SELECT  * FROM " + "RADICALS ORDER BY `NUMSTROKES` ASC";
 		Cursor c = myDatabase.rawQuery(selectQuery, null);
 		// looping through all rows and adding to list
 		if (c.moveToFirst()) {
 			int a = 0;
-//			do {
-//				KRadical radical = new KRadical(
-//						c.getInt(c.getColumnIndex("ID")),
-//						c.getInt(c.getColumnIndex("NUMSTROKES")),
-//						c.getBlob(c.getColumnIndex("IMAGE")) 
-//						);
-//				// adding to tags list
-//				radicals.add(radical);
-//			} while (c.moveToNext());
+			do {
+				KRadical radical = new KRadical(
+						c.getString(c.getColumnIndex("ID")),
+						c.getInt(c.getColumnIndex("NUMSTROKES")),
+						c.getBlob(c.getColumnIndex("IMAGE")) 
+						);
+				// adding to tags list
+				radicals.add(radical);
+			} while (c.moveToNext());
 		}
 		return radicals;
 	}

@@ -26,9 +26,8 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 
 	public HorzGridViewAdapter horzGridViewAdapter;
 	private Context mContext;
-
 	public static TwoWayGridView horzGridView ;
-
+	private ArrayList<KRadical> horzData;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -37,13 +36,14 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 		mContext = getActivity().getApplicationContext();
 		// Get handles to views that will be used
 		horzGridView = (TwoWayGridView) view.findViewById(R.id.horz_gridview);
-		
 		// Create the data for use in the vert gridview-same data will be passed
 		// to horz gridview
-		final ArrayList<KRadical> horzData = generateGridViewObjects();
-
+		horzData = (ArrayList<KRadical>)MainActivity.db.getAllRadicals();
+		horzData  = reArrange(horzData);
 		// Create the adapters for the gridviews
-		horzGridViewAdapter = new HorzGridViewAdapter(mContext, horzData);
+		horzGridViewAdapter = new HorzGridViewAdapter(mContext, R.layout.model_layout, horzData);
+				
+		//horzGridViewAdapter = new HorzGridViewAdapter(mContext, horzData);
 
 		// Set the adapter for the gridviews
 		horzGridView.setAdapter(horzGridViewAdapter);
@@ -55,17 +55,20 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 					int position, long id) {
 				Toast.makeText(mContext, "clicked " + position,
 						Toast.LENGTH_SHORT).show();
+				ImageView image = (ImageView)view.findViewById(R.id.horz_gv_iv);
+				image.setAlpha(50);
 				
-				horzData.get(position).setOnSelect(true);
-				for(int i=0;i<horzData.size();i++){
-					if(!horzData.get(position).getRelatedRadicals().contains(horzData.get(i))){
-//						Log.e("",horzData.get(i).getId());
-						horzData.get(i).setOnFocus(false);
-//					Log.e("",horzData.get(position).getRelatedRadicals().get(i).getId()+"");
-					}
-				}
-				horzData.get(position).setOnFocus(true);
-				horzGridView.invalidateViews();
+				//				horzData.get(position).setOnSelect(true);
+//				for(int i=0;i<horzData.size();i++){
+//					if(!horzData.get(position).getRelatedRadicals().contains(horzData.get(i))){
+////						Log.e("",horzData.get(i).getId());
+//						horzData.get(i).setOnFocus(false);
+////					Log.e("",horzData.get(position).getRelatedRadicals().get(i).getId()+"");
+//					}
+//				}
+//				horzData.get(position).setOnFocus(true);
+//				
+//				horzGridViewAdapter.notifyDataSetChanged();
 			}
 		});
 		
@@ -92,6 +95,17 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 		
 		
 		return view;
+	}
+
+	private ArrayList<KRadical> reArrange(ArrayList<KRadical> horzData) {
+		// TODO Auto-generated method stub
+		ArrayList<KRadical> output = new ArrayList<KRadical>();
+		int curNumStroke = 0;
+		int num=0;
+		for(int i=0;i<horzData.size();i++){
+		
+		}
+		return horzData;
 	}
 
 	@Override

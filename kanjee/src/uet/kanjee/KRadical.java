@@ -40,6 +40,7 @@ public class KRadical {
 		setRelatedRadicals(new ArrayList<KRadical>());
 	}
 	public KRadical(String id, int numStrokes, byte[] image){
+		onFocus=true;
 		this.setId(id);
 		this.setNumStrokes(numStrokes);
 		

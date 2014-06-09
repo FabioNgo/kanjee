@@ -13,13 +13,29 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class HorzGridViewAdapter extends BaseAdapter  {
+public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 	
+	public HorzGridViewAdapter(Context context, int resource, ArrayList<KRadical> objects) {
+		super(context, resource, objects);
+		// TODO Auto-generated constructor stub
+		this.mContext = context;
+		this.data = objects;
+
+		rows = 8;
+		columns = 1;
+		rowHeight = 100;
+		columnWidth=100;
+		RadicalsFragment.horzGridView.setNumRows(rows);
+		RadicalsFragment.horzGridView.setRowHeight(rowHeight);
+	}
+
+
 	private Context mContext;
 	private ArrayList<KRadical> data;	
 	
@@ -30,17 +46,17 @@ public class HorzGridViewAdapter extends BaseAdapter  {
 	private int columnWidth;
 	private int rowHeight;
 
-	public HorzGridViewAdapter(Context context,ArrayList<KRadical> data){
-		this.mContext = context;
-		this.data = data;
-
-		rows = 8;
-		columns = 1;
-		rowHeight = 100;
-		columnWidth=100;
-		RadicalsFragment.horzGridView.setNumRows(rows);
-		RadicalsFragment.horzGridView.setRowHeight(rowHeight);
-	}
+//	public HorzGridViewAdapter(Context context,ArrayList<KRadical> data){
+//		this.mContext = context;
+//		this.data = data;
+//
+//		rows = 8;
+//		columns = 1;
+//		rowHeight = 100;
+//		columnWidth=100;
+//		RadicalsFragment.horzGridView.setNumRows(rows);
+//		RadicalsFragment.horzGridView.setRowHeight(rowHeight);
+//	}
 
 
 	@SuppressWarnings("deprecation")
@@ -61,7 +77,10 @@ public class HorzGridViewAdapter extends BaseAdapter  {
 			
 			//User findViewById only when first creating the child view
 			handler = new ViewHandler();
+			//FrameLayout frameLayout = (FrameLayout)convertView.findViewById(R.id.layout);
+			//frameLayout.getLayoutParams().height = RadicalsFragment.height/8;
 			handler.iv = (ImageView) convertView.findViewById(R.id.horz_gv_iv);
+			
 			handler.tv = (TextView) convertView.findViewById(R.id.horz_gv_tv);
 			convertView.setTag(handler);
 			
@@ -72,8 +91,8 @@ public class HorzGridViewAdapter extends BaseAdapter  {
 		//Set the data outside once the handler and view are instantiated
 //		handler.iv.setBackgroundColor(thisData.getColor());
 		
-		
-		handler.iv.setImageResource(thisData.getImagePath());
+		handler.iv.setImageBitmap(thisData.getImage());
+		//handler.iv.setImageResource(thisData.getImagePath());
 		handler.tv.setText(thisData.getId());
 		if(!thisData.isOnFocus()){
 			handler.iv.setAlpha(90);
