@@ -95,7 +95,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				KRadical radical = new KRadical(
 						c.getString(c.getColumnIndex("ID")),
 						c.getInt(c.getColumnIndex("NUMSTROKES")),
-						c.getBlob(c.getColumnIndex("IMAGE")) 
+						c.getString(c.getColumnIndex("TEXT")) 
 						);
 				// adding to tags list
 				radicals.add(radical);
@@ -141,7 +141,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 					KRadical radical = new KRadical(
 							cursor.getString(cursor.getColumnIndex("ID")),
 							cursor.getInt(cursor.getColumnIndex("NUMSTROKES")),
-							cursor.getBlob(cursor.getColumnIndex("IMAGE")) 
+							cursor.getString(cursor.getColumnIndex("TEXT")) 
 							);
 					 //adding to tags list
 					radicals.add(radical);
@@ -168,8 +168,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			do {
 				KRadical tempRadical = new KRadical(cursor.getString(cursor
 						.getColumnIndex("ID")), cursor.getInt(cursor
-						.getColumnIndex("NUMSTROKES")), cursor.getBlob(cursor
-						.getColumnIndex("IMAGE")));
+						.getColumnIndex("NUMSTROKES")), cursor.getString(cursor
+						.getColumnIndex("TEXT")));
 				 
 				radicals.add(tempRadical);
 			} while (cursor.moveToNext());

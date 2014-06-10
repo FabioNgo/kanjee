@@ -66,7 +66,6 @@ public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 		KRadical thisData = data.get(position);
 		
 		//Use a viewHandler to improve performance
-		ViewHandler handler;
 		
 		//If reusing a view get the handler info; if view is null, create it
 		if(convertView == null){
@@ -76,40 +75,39 @@ public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 			convertView = inflater.inflate(R.layout.model_layout , parent, false);
 			
 			//User findViewById only when first creating the child view
-			handler = new ViewHandler();
+			//handler = new ViewHandler();
 			//FrameLayout frameLayout = (FrameLayout)convertView.findViewById(R.id.layout);
 			//frameLayout.getLayoutParams().height = RadicalsFragment.height/8;
-			handler.iv = (ImageView) convertView.findViewById(R.id.horz_gv_iv);
+			//handler.iv = (ImageView) convertView.findViewById(R.id.horz_gv_iv);
 			
-			handler.tv = (TextView) convertView.findViewById(R.id.horz_gv_tv);
-			convertView.setTag(handler);
+			
+			//convertView.setTag(handler);
 			
 		}else{
-			handler = (ViewHandler) convertView.getTag();
 		}
 		
 		//Set the data outside once the handler and view are instantiated
 //		handler.iv.setBackgroundColor(thisData.getColor());
 		
-		handler.iv.setImageBitmap(thisData.getImage());
+		//handler.iv.setImageBitmap(thisData.getImage());
 		//handler.iv.setImageResource(thisData.getImagePath());
-		handler.tv.setText(thisData.getId());
+		///TextView id = (TextView) convertView.findViewById(R.id.horz_gv_tv);
+		TextView content = (TextView) convertView.findViewById(R.id.content);
+		//id.setText(thisData.getId());
 		if(!thisData.isOnFocus()){
-			handler.iv.setAlpha(90);
+			content.setBackgroundColor(Color.argb(90, 255, 255, 255));
+			//handler.iv.setAlpha(90);
+		}else{
+			content.setBackgroundColor(Color.argb(0, 255, 255, 255));
 		}
 		if(thisData.isOnSelect()){
-			handler.iv.setColorFilter(Color.rgb(254, 255, 113),PorterDuff.Mode.MULTIPLY);
+			//handler.iv.setColorFilter(Color.rgb(254, 255, 113),PorterDuff.Mode.MULTIPLY);
 		}
-		FrameLayout.LayoutParams lp 
-			= new FrameLayout.LayoutParams(columnWidth, rowHeight);// convertView.getLayoutParams();
-		handler.iv.setLayoutParams(lp);
+//		FrameLayout.LayoutParams lp 
+//			= new FrameLayout.LayoutParams(columnWidth, rowHeight);// convertView.getLayoutParams();
+//		handler.iv.setLayoutParams(lp);
 
 		return convertView;
-	}
-	
-	public class ViewHandler{
-		ImageView iv;
-		TextView tv;
 	}
 	
 

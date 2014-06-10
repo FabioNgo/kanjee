@@ -55,8 +55,8 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 					int position, long id) {
 				Toast.makeText(mContext, "clicked " + position,
 						Toast.LENGTH_SHORT).show();
-				ImageView image = (ImageView)view.findViewById(R.id.horz_gv_iv);
-				image.setAlpha(50);
+				//ImageView image = (ImageView)view.findViewById(R.id.horz_gv_iv);
+				//image.setAlpha(50);
 				
 				//				horzData.get(position).setOnSelect(true);
 //				for(int i=0;i<horzData.size();i++){
@@ -139,30 +139,30 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 			allData.add(singleObject);
 		}
 
-		allData.get(0).setImagePath(R.drawable.a1);
-		allData.get(1).setImagePath(R.drawable.a11);
-		allData.get(2).setImagePath(R.drawable.a12);
-		allData.get(3).setImagePath(R.drawable.a13);
-		allData.get(4).setImagePath(R.drawable.a14);
-		allData.get(5).setImagePath(R.drawable.a15);
-		allData.get(6).setImagePath(R.drawable.a16);
-		allData.get(8).setImagePath(R.drawable.a2);
-		allData.get(9).setImagePath(R.drawable.a21);
-		allData.get(10).setImagePath(R.drawable.a22);
-		allData.get(11).setImagePath(R.drawable.a23);
-		allData.get(12).setImagePath(R.drawable.a24);
-		allData.get(13).setImagePath(R.drawable.a25);
-		allData.get(14).setImagePath(R.drawable.a26);
-		allData.get(16).setImagePath(R.drawable.a3);
-		allData.get(24).setImagePath(R.drawable.a4);
-		allData.get(25).setImagePath(R.drawable.a41);
-		allData.get(32).setImagePath(R.drawable.a5);
-		allData.get(33).setImagePath(R.drawable.a51);
-		allData.get(34).setImagePath(R.drawable.a52);
-		allData.get(33).getRelatedRadicals().add(allData.get(4));
-		allData.get(33).getRelatedRadicals().add(allData.get(10));
-		allData.get(33).getRelatedRadicals().add(allData.get(25));
-		allData.get(33).getRelatedRadicals().add(allData.get(34));
+//		allData.get(0).setImagePath(R.drawable.a1);
+//		allData.get(1).setImagePath(R.drawable.a11);
+//		allData.get(2).setImagePath(R.drawable.a12);
+//		allData.get(3).setImagePath(R.drawable.a13);
+//		allData.get(4).setImagePath(R.drawable.a14);
+//		allData.get(5).setImagePath(R.drawable.a15);
+//		allData.get(6).setImagePath(R.drawable.a16);
+//		allData.get(8).setImagePath(R.drawable.a2);
+//		allData.get(9).setImagePath(R.drawable.a21);
+//		allData.get(10).setImagePath(R.drawable.a22);
+//		allData.get(11).setImagePath(R.drawable.a23);
+//		allData.get(12).setImagePath(R.drawable.a24);
+//		allData.get(13).setImagePath(R.drawable.a25);
+//		allData.get(14).setImagePath(R.drawable.a26);
+//		allData.get(16).setImagePath(R.drawable.a3);
+//		allData.get(24).setImagePath(R.drawable.a4);
+//		allData.get(25).setImagePath(R.drawable.a41);
+//		allData.get(32).setImagePath(R.drawable.a5);
+//		allData.get(33).setImagePath(R.drawable.a51);
+//		allData.get(34).setImagePath(R.drawable.a52);
+//		allData.get(33).getRelatedRadicals().add(allData.get(4));
+//		allData.get(33).getRelatedRadicals().add(allData.get(10));
+//		allData.get(33).getRelatedRadicals().add(allData.get(25));
+//		allData.get(33).getRelatedRadicals().add(allData.get(34));
 		return allData;
 	}
 }
