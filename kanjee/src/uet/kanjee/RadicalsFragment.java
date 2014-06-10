@@ -39,7 +39,7 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 		// Create the data for use in the vert gridview-same data will be passed
 		// to horz gridview
 		horzData = (ArrayList<KRadical>)MainActivity.db.getAllRadicals();
-		horzData  = reArrange(horzData);
+		//horzData  = reArrange(horzData);
 		// Create the adapters for the gridviews
 		horzGridViewAdapter = new HorzGridViewAdapter(mContext, R.layout.model_layout, horzData);
 				
@@ -55,6 +55,16 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 					int position, long id) {
 				Toast.makeText(mContext, "clicked " + position,
 						Toast.LENGTH_SHORT).show();
+				FrameLayout frameLayout = (FrameLayout)view.findViewById(R.id.layout);
+			
+				if(horzData.get(position).isOnFocus()){
+					frameLayout.setBackgroundColor(Color.argb(0, 00, 99, 0xcc));
+					horzData.get(position).setOnFocus(false);
+				}else{
+					frameLayout.setBackgroundColor(Color.argb(255, 00, 99, 0xcc));
+					horzData.get(position).setOnFocus(true);
+				}
+				
 				//ImageView image = (ImageView)view.findViewById(R.id.horz_gv_iv);
 				//image.setAlpha(50);
 				
@@ -138,31 +148,6 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 			KRadical singleObject = new KRadical(name, color);
 			allData.add(singleObject);
 		}
-
-//		allData.get(0).setImagePath(R.drawable.a1);
-//		allData.get(1).setImagePath(R.drawable.a11);
-//		allData.get(2).setImagePath(R.drawable.a12);
-//		allData.get(3).setImagePath(R.drawable.a13);
-//		allData.get(4).setImagePath(R.drawable.a14);
-//		allData.get(5).setImagePath(R.drawable.a15);
-//		allData.get(6).setImagePath(R.drawable.a16);
-//		allData.get(8).setImagePath(R.drawable.a2);
-//		allData.get(9).setImagePath(R.drawable.a21);
-//		allData.get(10).setImagePath(R.drawable.a22);
-//		allData.get(11).setImagePath(R.drawable.a23);
-//		allData.get(12).setImagePath(R.drawable.a24);
-//		allData.get(13).setImagePath(R.drawable.a25);
-//		allData.get(14).setImagePath(R.drawable.a26);
-//		allData.get(16).setImagePath(R.drawable.a3);
-//		allData.get(24).setImagePath(R.drawable.a4);
-//		allData.get(25).setImagePath(R.drawable.a41);
-//		allData.get(32).setImagePath(R.drawable.a5);
-//		allData.get(33).setImagePath(R.drawable.a51);
-//		allData.get(34).setImagePath(R.drawable.a52);
-//		allData.get(33).getRelatedRadicals().add(allData.get(4));
-//		allData.get(33).getRelatedRadicals().add(allData.get(10));
-//		allData.get(33).getRelatedRadicals().add(allData.get(25));
-//		allData.get(33).getRelatedRadicals().add(allData.get(34));
 		return allData;
 	}
 }

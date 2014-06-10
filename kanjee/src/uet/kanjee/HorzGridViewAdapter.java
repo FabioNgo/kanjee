@@ -93,6 +93,8 @@ public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 		//handler.iv.setImageResource(thisData.getImagePath());
 		///TextView id = (TextView) convertView.findViewById(R.id.horz_gv_tv);
 		TextView content = (TextView) convertView.findViewById(R.id.content);
+		content.setText(thisData.getText());
+		content.setTextSize(20);
 		//id.setText(thisData.getId());
 		if(!thisData.isOnFocus()){
 			content.setBackgroundColor(Color.argb(90, 255, 255, 255));
