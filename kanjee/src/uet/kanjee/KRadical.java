@@ -14,6 +14,8 @@ public class KRadical {
 	private boolean onSelect;
 	private int numStrokes;
 	private String text;
+	private boolean isHeader;
+	private boolean isFilled;
 	public KRadical() {
 		// TODO Auto-generated constructor stub
 		setId("-1");
@@ -35,6 +37,17 @@ public class KRadical {
 		this.setId(id);
 		this.setNumStrokes(numStrokes);
 		this.setText(text);
+		this.isHeader = false;
+		this.isFilled =false;
+		
+	}
+	public KRadical(KRadical radical,boolean isHeader,boolean isFilled){
+		onFocus=true;
+		this.setId(radical.getId());
+		this.setNumStrokes(radical.getNumStrokes());
+		this.setText(radical.getText());
+		this.isFilled = isFilled;
+		this.isHeader = isHeader;
 		
 	}
 	/**
@@ -100,6 +113,22 @@ public class KRadical {
 	public void setText(String text) {
 		this.text = text;
 	}
+
+	/**
+	 * @return the isRealText
+	 */
+	public boolean isHeader() {
+		return isHeader;
+	}
+
+	/**
+	 * @return the isFilled
+	 */
+	public boolean isFilled() {
+		return isFilled;
+	}
+
+
 	
 
 }

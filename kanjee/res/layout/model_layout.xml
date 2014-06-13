@@ -1,29 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingLeft="-15dp"
+    android:paddingRight="-15dp"
+    android:paddingTop="-10dp"
+    android:paddingBottom="-10dp"
     android:background="#000000" >
 
-<!-- 	android:padding="@dimen/item_padding"     -->
+
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true"
+    android:alpha="0"
+    android:src="@drawable/bg" />
 
     <TextView
         android:id="@+id/content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Large Text"
-        android:layout_gravity="center"
-        android:padding="1dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_centerInParent="true"
+        
         android:textColor="#FFFFFF" />
 
     <TextView
-        android:id="@+id/horz_gv_tv"
+        android:id="@+id/header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="invisible"
-        android:layout_gravity="center_vertical"
-       />
+        android:layout_centerInParent="true"
+        android:gravity="center" />
 
-</FrameLayout>
+</RelativeLayout>

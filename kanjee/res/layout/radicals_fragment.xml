@@ -1,25 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" xmlns:app="http://schemas.android.com/apk/res/uet.kanjee">
-
-    
-
-    <com.jess.ui.TwoWayGridView
+    <com.jess.ui.TwoWayGridView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/horz_gridview"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-	    android:background="#E8E8E8"
-	    app:cacheColorHint="#E8E8E8"
-	    app:verticalSpacing="1dp"
-	    app:horizontalSpacing="1dp"
-	    app:stretchMode="columnWidth"
-	    app:scrollDirectionPortrait="horizontal"
-	    app:scrollDirectionLandscape="horizontal"
-	    app:gravity="center"
-	    android:layout_gravity="center"/>
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="#E8E8E8"
+        app:cacheColorHint="#E8E8E8"
+        app:gravity="center"
+        app:horizontalSpacing="1dp"
+        app:scrollDirectionPortrait="horizontal"
+        app:stretchMode="columnWidth"
+        app:verticalSpacing="1dp" />
 
-</LinearLayout>

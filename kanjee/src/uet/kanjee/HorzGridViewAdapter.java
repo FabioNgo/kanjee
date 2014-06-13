@@ -33,10 +33,10 @@ public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 		columns = 1;
 //		rowHeight = 100;
 //		columnWidth=100;
-		size =MainActivity.screenHeight/rows;
+		size =(int)(MainActivity.screenHeight*0.92)/rows;
 		RadicalsFragment.horzGridView.setNumRows(rows);
-		RadicalsFragment.horzGridView.setRowHeight(size);
-		RadicalsFragment.horzGridView.setColumnWidth(size);
+		//RadicalsFragment.horzGridView.setRowHeight(size);
+		//RadicalsFragment.horzGridView.setColumnWidth(size);
 	}
 
 
@@ -68,7 +68,8 @@ public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		//Get the data for the given position in the array
 		KRadical thisData = data.get(position);
-		
+		TextView header = new TextView(mContext);
+		TextView content = new TextView(mContext);
 		//Use a viewHandler to improve performance
 		
 		//If reusing a view get the handler info; if view is null, create it
@@ -77,7 +78,8 @@ public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 			//Only get the inflater when it's needed, then release it-which isn't frequently
 			LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = inflater.inflate(R.layout.model_layout , parent, false);
-			
+			header = (TextView)convertView.findViewById(R.id.header);
+			content = (TextView) convertView.findViewById(R.id.content);
 			//User findViewById only when first creating the child view
 			//handler = new ViewHandler();
 			//FrameLayout frameLayout = (FrameLayout)convertView.findViewById(R.id.layout);
@@ -96,12 +98,22 @@ public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 		//handler.iv.setImageBitmap(thisData.getImage());
 		//handler.iv.setImageResource(thisData.getImagePath());
 		///TextView id = (TextView) convertView.findViewById(R.id.horz_gv_tv);
-		TextView content = (TextView) convertView.findViewById(R.id.content);
+		KRadical curRadical = data.get(position);
+		
 		
 		content.setTypeface(MainActivity.font);
 		content.setText(thisData.getText());
 		content.setTextSize(size/4);
-		
+		if(curRadical.isFilled()){
+			content.setVisibility(View.INVISIBLE);
+			header.setVisibility(View.INVISIBLE);
+			
+		}
+		if(curRadical.isHeader()){
+			content.setVisibility(View.INVISIBLE);
+			header.setVisibility(View.VISIBLE);
+			header.setText(String.valueOf(curRadical.getNumStrokes()));
+		}
 		//id.setText(thisData.getId());
 //		if(!thisData.isOnFocus()){
 //			content.setBackgroundColor(Color.argb(90, 255, 255, 255));
