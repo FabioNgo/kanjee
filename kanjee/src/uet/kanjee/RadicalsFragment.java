@@ -6,6 +6,7 @@ import java.util.Random;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jess.ui.TwoWayAdapterView;
@@ -36,9 +38,18 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 		mContext = getActivity().getApplicationContext();
 		// Get handles to views that will be used
 		horzGridView = (TwoWayGridView) view.findViewById(R.id.horz_gridview);
+		
 		// Create the data for use in the vert gridview-same data will be passed
 		// to horz gridview
 		horzData = (ArrayList<KRadical>)MainActivity.db.getAllRadicals();
+		String temp="";
+		for(int i=0;i<horzData.size();i++){
+			temp += horzData.get(i).getText()+".";
+		}
+		
+		//StringBuilder stringBuilder = new StringBuilder(temp);
+		
+		//tv.setText(temp);
 		//horzData  = reArrange(horzData);
 		// Create the adapters for the gridviews
 		horzGridViewAdapter = new HorzGridViewAdapter(mContext, R.layout.model_layout, horzData);
@@ -58,10 +69,10 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 				FrameLayout frameLayout = (FrameLayout)view.findViewById(R.id.layout);
 			
 				if(horzData.get(position).isOnFocus()){
-					frameLayout.setBackgroundColor(Color.argb(0, 00, 99, 0xcc));
+					frameLayout.setBackgroundColor(Color.argb(0, 0x00, 0x99, 0xcc));
 					horzData.get(position).setOnFocus(false);
 				}else{
-					frameLayout.setBackgroundColor(Color.argb(255, 00, 99, 0xcc));
+					frameLayout.setBackgroundColor(Color.argb(255, 0x00, 0x99, 0xcc));
 					horzData.get(position).setOnFocus(true);
 				}
 				

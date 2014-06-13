@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" xmlns:app="http://schemas.android.com/apk/res/uet.kanjee">
+
+    
 
     <com.jess.ui.TwoWayGridView
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -12,9 +14,9 @@
         android:layout_weight="1"
 	    android:background="#E8E8E8"
 	    app:cacheColorHint="#E8E8E8"
-	    app:verticalSpacing="0dp"
-	    app:horizontalSpacing="0dp"
-	    app:stretchMode="none"
+	    app:verticalSpacing="1dp"
+	    app:horizontalSpacing="1dp"
+	    app:stretchMode="columnWidth"
 	    app:scrollDirectionPortrait="horizontal"
 	    app:scrollDirectionLandscape="horizontal"
 	    app:gravity="center"

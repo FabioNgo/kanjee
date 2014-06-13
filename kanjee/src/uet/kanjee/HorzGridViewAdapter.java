@@ -9,7 +9,9 @@ import com.jess.ui.TwoWayAdapterView.OnItemClickListener;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.os.Handler;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +20,7 @@ import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import uet.kanjee.RadicalsFragment;
 public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 	
 	public HorzGridViewAdapter(Context context, int resource, ArrayList<KRadical> objects) {
@@ -29,10 +31,12 @@ public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 
 		rows = 8;
 		columns = 1;
-		rowHeight = 100;
-		columnWidth=100;
+//		rowHeight = 100;
+//		columnWidth=100;
+		size =MainActivity.screenHeight/rows;
 		RadicalsFragment.horzGridView.setNumRows(rows);
-		RadicalsFragment.horzGridView.setRowHeight(rowHeight);
+		RadicalsFragment.horzGridView.setRowHeight(size);
+		RadicalsFragment.horzGridView.setColumnWidth(size);
 	}
 
 
@@ -45,6 +49,7 @@ public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 	private int itemPadding;
 	private int columnWidth;
 	private int rowHeight;
+	private int size;
 
 //	public HorzGridViewAdapter(Context context,ArrayList<KRadical> data){
 //		this.mContext = context;
@@ -92,8 +97,11 @@ public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 		//handler.iv.setImageResource(thisData.getImagePath());
 		///TextView id = (TextView) convertView.findViewById(R.id.horz_gv_tv);
 		TextView content = (TextView) convertView.findViewById(R.id.content);
+		
+		content.setTypeface(MainActivity.font);
 		content.setText(thisData.getText());
-		content.setTextSize(20);
+		content.setTextSize(size/4);
+		
 		//id.setText(thisData.getId());
 //		if(!thisData.isOnFocus()){
 //			content.setBackgroundColor(Color.argb(90, 255, 255, 255));

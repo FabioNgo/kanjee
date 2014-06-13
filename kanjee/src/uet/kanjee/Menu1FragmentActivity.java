@@ -13,6 +13,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
 public class Menu1FragmentActivity extends FragmentActivity implements
 		OnClickListener {
@@ -40,8 +41,12 @@ public class Menu1FragmentActivity extends FragmentActivity implements
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		// this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 		// WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setContentView(R.layout.menu1_fragmentactivity);
 		
+		setContentView(R.layout.menu1_fragmentactivity);
+		RelativeLayout relativeLayout2 = (RelativeLayout)findViewById(R.id.RelativeLayout2);
+		relativeLayout2.getLayoutParams().height = (int) (MainActivity.screenHeight*0.08);
+		FrameLayout frameLayout = (FrameLayout)findViewById(R.id.framelayout1);
+		frameLayout.getLayoutParams().height = (int) (MainActivity.screenHeight*0.92);
 		menu1Fragment1 = new RadicalsFragment();
 		getSupportFragmentManager().beginTransaction().replace(R.id.framelayout1, menu1Fragment1).commit();
 		

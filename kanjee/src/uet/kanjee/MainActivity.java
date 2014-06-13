@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -32,7 +34,9 @@ public class MainActivity extends Activity implements OnClickListener{
 	public static DatabaseHelper db;
 	ImageView im1;
 	static final String DB_NAME = "kanjee.sqlt";
-	
+	public static int screenHeight;
+	public static int screenWidth;
+	public static Typeface font;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -40,6 +44,12 @@ public class MainActivity extends Activity implements OnClickListener{
 		setContentView(R.layout.activity_main);
 		im1 = (ImageView) findViewById(R.id.imageView1);
 		im1.setOnClickListener(this);
+		DisplayMetrics displayMetrics = new DisplayMetrics();
+        this.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        screenHeight = displayMetrics.heightPixels;
+        screenWidth = displayMetrics.widthPixels;
+        font = Typeface.createFromAsset(getAssets(), "font.OTF");
+	
 		copyAssets();
 		try {
 			db = new DatabaseHelper(getApplicationContext());
