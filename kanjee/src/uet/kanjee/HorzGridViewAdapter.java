@@ -59,7 +59,6 @@ public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 //	}
 
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		//Get the data for the given position in the array
@@ -96,15 +95,15 @@ public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 		content.setText(thisData.getText());
 		content.setTextSize(20);
 		//id.setText(thisData.getId());
-		if(!thisData.isOnFocus()){
-			content.setBackgroundColor(Color.argb(90, 255, 255, 255));
-			//handler.iv.setAlpha(90);
-		}else{
-			content.setBackgroundColor(Color.argb(0, 255, 255, 255));
-		}
-		if(thisData.isOnSelect()){
+//		if(!thisData.isOnFocus()){
+//			content.setBackgroundColor(Color.argb(90, 255, 255, 255));
+//			//handler.iv.setAlpha(90);
+//		}else{
+//			content.setBackgroundColor(Color.argb(0, 255, 255, 255));
+//		}
+//		if(thisData.isOnSelect()){
 			//handler.iv.setColorFilter(Color.rgb(254, 255, 113),PorterDuff.Mode.MULTIPLY);
-		}
+//		}
 //		FrameLayout.LayoutParams lp 
 //			= new FrameLayout.LayoutParams(columnWidth, rowHeight);// convertView.getLayoutParams();
 //		handler.iv.setLayoutParams(lp);

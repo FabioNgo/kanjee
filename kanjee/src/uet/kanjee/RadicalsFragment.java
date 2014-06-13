@@ -82,26 +82,26 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 			}
 		});
 		
-		ViewTreeObserver observer = horzGridView.getViewTreeObserver();
-
-	        observer.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
-
-	            @SuppressLint("NewApi")
-				@Override
-	            public void onGlobalLayout() {
-	            	int newcolw = (int) ((horzGridView.getHeight()/8));
-//	            	Log.e("",""+(mContext.getResources().getDimension(R.dimen.item_padding)));
-	            	int newrowh = newcolw;
-	            	horzGridView.setColumnWidth(newcolw);
-	            	horzGridViewAdapter.setColumnWidth(newcolw);
-	            	horzGridView.setRowHeight(newrowh);
-	            	horzGridViewAdapter.setRowHeight(newrowh);
-
-	            	horzGridView.invalidateViews();
-	            	
-	                horzGridView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-	            }
-	        });
+//		ViewTreeObserver observer = horzGridView.getViewTreeObserver();
+//
+//	        observer.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+//
+//	            @SuppressLint("NewApi")
+//				@Override
+//	            public void onGlobalLayout() {
+//	            	int newcolw = (int) ((horzGridView.getHeight()/8));
+////	            	Log.e("",""+(mContext.getResources().getDimension(R.dimen.item_padding)));
+//	            	int newrowh = newcolw;
+//	            	horzGridView.setColumnWidth(newcolw);
+//	            	horzGridViewAdapter.setColumnWidth(newcolw);
+//	            	horzGridView.setRowHeight(newrowh);
+//	            	horzGridViewAdapter.setRowHeight(newrowh);
+//
+//	            	horzGridView.invalidateViews();
+//	            	
+//	                horzGridView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+//	            }
+//	        });
 		
 		
 		return view;
