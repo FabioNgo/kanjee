@@ -72,7 +72,6 @@ public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 		KRadical thisData = data.get(position);
 		TextView header = new TextView(mContext);
 		TextView content = new TextView(mContext);
-		ImageView bg = new ImageView(mContext);
 		//Use a viewHandler to improve performance
 		
 		//If reusing a view get the handler info; if view is null, create it
@@ -82,26 +81,9 @@ public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 			LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = inflater.inflate(R.layout.model_layout , parent, false);
 			
-			//User findViewById only when first creating the child view
-			//handler = new ViewHandler();
-			//FrameLayout frameLayout = (FrameLayout)convertView.findViewById(R.id.layout);
-			//frameLayout.getLayoutParams().height = RadicalsFragment.height/8;
-			//handler.iv = (ImageView) convertView.findViewById(R.id.horz_gv_iv);
-			
-			
-			//convertView.setTag(handler);
-			
 		}
 		
-		//Set the data outside once the handler and view are instantiated
-//		handler.iv.setBackgroundColor(thisData.getColor());
-		
-		//handler.iv.setImageBitmap(thisData.getImage());
-		//handler.iv.setImageResource(thisData.getImagePath());
-		///TextView id = (TextView) convertView.findViewById(R.id.horz_gv_tv);
-		
 		content = (TextView) convertView.findViewById(R.id.content);
-		bg = (ImageView)convertView.findViewById(R.id.bg);
 		KRadical curRadical = data.get(position);
 		
 		
@@ -109,11 +91,6 @@ public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 		content.setText(thisData.getText());
 		content.setTextSize(size/4);
 		
-		if(curRadical.isOnFocus()){
-			bg.setAlpha(0);
-		}else{
-			bg.setAlpha(100);
-		}
 		if(curRadical.isFilled()){
 			content.setVisibility(View.INVISIBLE);
 			
@@ -123,23 +100,7 @@ public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 		if(curRadical.isHeader()){
 			content.setText(String.valueOf(curRadical.getNumStrokes()));
 		}else{
-			
-			//content.setVisibility(View.VISIBLE);
 		}
-		//id.setText(thisData.getId());
-//		if(!thisData.isOnFocus()){
-//			content.setBackgroundColor(Color.argb(90, 255, 255, 255));
-//			//handler.iv.setAlpha(90);
-//		}else{
-//			content.setBackgroundColor(Color.argb(0, 255, 255, 255));
-//		}
-//		if(thisData.isOnSelect()){
-			//handler.iv.setColorFilter(Color.rgb(254, 255, 113),PorterDuff.Mode.MULTIPLY);
-//		}
-//		FrameLayout.LayoutParams lp 
-//			= new FrameLayout.LayoutParams(columnWidth, rowHeight);// convertView.getLayoutParams();
-//		handler.iv.setLayoutParams(lp);
-
 		return convertView;
 	}
 	

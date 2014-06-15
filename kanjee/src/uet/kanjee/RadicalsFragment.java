@@ -1,25 +1,20 @@
 package uet.kanjee;
 
 import java.util.ArrayList;
-import java.util.Currency;
-import java.util.Random;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.Typeface;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jess.ui.TwoWayAdapterView;
@@ -33,6 +28,7 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 	public static TwoWayGridView horzGridView;
 	private ArrayList<KRadical> horzData;
 	ArrayList<KRadical> horzDataArranged;
+	ArrayList<KRadical> radicalsSelected;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -49,15 +45,8 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 		horzData = (ArrayList<KRadical>) MainActivity.db.getAllRadicals();
 		horzDataArranged = reArrange(horzData);
 
-		// StringBuilder stringBuilder = new StringBuilder(temp);
-
-		// tv.setText(temp);
-		// horzData = reArrange(horzData);
-		// Create the adapters for the gridviews
 		horzGridViewAdapter = new HorzGridViewAdapter(mContext,
 				R.layout.model_layout, horzDataArranged);
-
-		// horzGridViewAdapter = new HorzGridViewAdapter(mContext, horzData);
 
 		// Set the adapter for the gridviews
 		horzGridView.setAdapter(horzGridViewAdapter);
@@ -67,61 +56,32 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 			@Override
 			public void onItemClick(TwoWayAdapterView<?> parent, View view,
 					int position, long id) {
-//				Toast.makeText(mContext, "clicked " + position,
-//						Toast.LENGTH_SHORT).show();
-				ImageView bg = (ImageView)view.findViewById(R.id.bg);
-				if (horzDataArranged.get(position).isOnFocus()) {
-					bg.setAlpha(100);
-					horzDataArranged.get(position).setOnFocus(false);
-				} else {
-					bg.setAlpha(0);
-					horzDataArranged.get(position).setOnFocus(true);
-				}
-
-				// ImageView image =
-				// (ImageView)view.findViewById(R.id.horz_gv_iv);
-				// image.setAlpha(50);
-
-				// horzData.get(position).setOnSelect(true);
-				// for(int i=0;i<horzData.size();i++){
-				// if(!horzData.get(position).getRelatedRadicals().contains(horzData.get(i))){
-				// // Log.e("",horzData.get(i).getId());
-				// horzData.get(i).setOnFocus(false);
-				// //
-				// Log.e("",horzData.get(position).getRelatedRadicals().get(i).getId()+"");
-				// }
-				// }
-				// horzData.get(position).setOnFocus(true);
-				//
-				// horzGridViewAdapter.notifyDataSetChanged();
+				Toast.makeText(mContext, "clicked " + position,
+						Toast.LENGTH_SHORT).show();
+				doOnClick(view, position);
 			}
 		});
-
-		// ViewTreeObserver observer = horzGridView.getViewTreeObserver();
-		//
-		// observer.addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
-		//
-		// @SuppressLint("NewApi")
-		// @Override
-		// public void onGlobalLayout() {
-		// int newcolw = (int) ((horzGridView.getHeight()/8));
-		// //
-		// Log.e("",""+(mContext.getResources().getDimension(R.dimen.item_padding)));
-		// int newrowh = newcolw;
-		// horzGridView.setColumnWidth(newcolw);
-		// horzGridViewAdapter.setColumnWidth(newcolw);
-		// horzGridView.setRowHeight(newrowh);
-		// horzGridViewAdapter.setRowHeight(newrowh);
-		//
-		// horzGridView.invalidateViews();
-		//
-		// horzGridView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-		// }
-		// });
-
 		return view;
 	}
+	
+	public void doOnClick(View view, int position) {
+		RelativeLayout fl = (RelativeLayout) view.findViewById(R.id.layout);
+//		if (horzDataArranged.get(position).isOnFocus()) {
+//			bg.setAlpha(180);
+//			horzDataArranged.get(position).setOnFocus(false);
+//		} else {
+//			bg.setAlpha(0);
+//			horzDataArranged.get(position).setOnFocus(true);
+//		}
+		if (!horzDataArranged.get(position).isOnSelect()) {
+			fl.setBackgroundColor(Color.rgb(254, 255, 113));
+			horzDataArranged.get(position).setOnSelect(false);
+		} else {
+			fl.setBackgroundColor(Color.rgb(211, 88, 247));
+			horzDataArranged.get(position).setOnSelect(true);
 
+		}
+	}
 	private ArrayList<KRadical> reArrange(ArrayList<KRadical> horzData) {
 		// TODO Auto-generated method stub
 		ArrayList<KRadical> output = new ArrayList<KRadical>();
