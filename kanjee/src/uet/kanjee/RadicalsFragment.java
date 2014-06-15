@@ -96,8 +96,8 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 				}
 			}
 			if(i<horzData.size()){
-				if (curNumStroke != horzData.get(i).getNumStrokes() && num % 8 == 0) {
-					output.add(new KRadical(horzData.get(i+1),true,false));
+				if (curNumStroke != horzData.get(i).getNumStrokes() && num % 8 == 0) { // add header
+					output.add(new KRadical(horzData.get(i),true,false));
 					
 					curNumStroke++;
 					num++;
@@ -109,7 +109,10 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 					while (num % 8 != 0) {
 						output.add(new KRadical(horzData.get(i),false,true));
 						num++;
+						
 					}
+					i--;
+					
 				} else {
 					output.add(horzData.get(i));
 					num++;
