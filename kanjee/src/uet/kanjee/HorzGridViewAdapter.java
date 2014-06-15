@@ -7,6 +7,7 @@ import com.jess.ui.TwoWayAdapterView;
 import com.jess.ui.TwoWayAdapterView.OnItemClickListener;
 
 import android.content.Context;
+import android.database.CursorWrapper;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
@@ -64,12 +65,14 @@ public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 //	}
 
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		//Get the data for the given position in the array
 		KRadical thisData = data.get(position);
 		TextView header = new TextView(mContext);
 		TextView content = new TextView(mContext);
+		ImageView bg = new ImageView(mContext);
 		//Use a viewHandler to improve performance
 		
 		//If reusing a view get the handler info; if view is null, create it
@@ -78,8 +81,7 @@ public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 			//Only get the inflater when it's needed, then release it-which isn't frequently
 			LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = inflater.inflate(R.layout.model_layout , parent, false);
-			header = (TextView)convertView.findViewById(R.id.header);
-			content = (TextView) convertView.findViewById(R.id.content);
+			
 			//User findViewById only when first creating the child view
 			//handler = new ViewHandler();
 			//FrameLayout frameLayout = (FrameLayout)convertView.findViewById(R.id.layout);
@@ -89,7 +91,6 @@ public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 			
 			//convertView.setTag(handler);
 			
-		}else{
 		}
 		
 		//Set the data outside once the handler and view are instantiated
@@ -98,21 +99,32 @@ public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 		//handler.iv.setImageBitmap(thisData.getImage());
 		//handler.iv.setImageResource(thisData.getImagePath());
 		///TextView id = (TextView) convertView.findViewById(R.id.horz_gv_tv);
+		
+		content = (TextView) convertView.findViewById(R.id.content);
+		bg = (ImageView)convertView.findViewById(R.id.bg);
 		KRadical curRadical = data.get(position);
 		
 		
 		content.setTypeface(MainActivity.font);
 		content.setText(thisData.getText());
 		content.setTextSize(size/4);
+		
+		if(curRadical.isOnFocus()){
+			bg.setAlpha(0);
+		}else{
+			bg.setAlpha(100);
+		}
 		if(curRadical.isFilled()){
 			content.setVisibility(View.INVISIBLE);
-			header.setVisibility(View.INVISIBLE);
 			
+		}else{
+			content.setVisibility(View.VISIBLE);
 		}
 		if(curRadical.isHeader()){
-			content.setVisibility(View.INVISIBLE);
-			header.setVisibility(View.VISIBLE);
-			header.setText(String.valueOf(curRadical.getNumStrokes()));
+			content.setText(String.valueOf(curRadical.getNumStrokes()));
+		}else{
+			
+			//content.setVisibility(View.VISIBLE);
 		}
 		//id.setText(thisData.getId());
 //		if(!thisData.isOnFocus()){

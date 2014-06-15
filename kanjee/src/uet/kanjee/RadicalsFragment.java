@@ -27,17 +27,19 @@ import com.jess.ui.TwoWayAdapterView.OnItemClickListener;
 import com.jess.ui.TwoWayGridView;
 
 public class RadicalsFragment extends Fragment implements OnClickListener {
-
+	View view;
 	public HorzGridViewAdapter horzGridViewAdapter;
 	private Context mContext;
 	public static TwoWayGridView horzGridView;
 	private ArrayList<KRadical> horzData;
-
+	ArrayList<KRadical> horzDataArranged;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.radicals_fragment, container,
+		if(view == null){
+		view = inflater.inflate(R.layout.radicals_fragment, container,
 				false);
+		}
 		mContext = getActivity().getApplicationContext();
 		// Get handles to views that will be used
 		horzGridView = (TwoWayGridView) view.findViewById(R.id.horz_gridview);
@@ -45,7 +47,7 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 		// Create the data for use in the vert gridview-same data will be passed
 		// to horz gridview
 		horzData = (ArrayList<KRadical>) MainActivity.db.getAllRadicals();
-		horzData = reArrange(horzData);
+		horzDataArranged = reArrange(horzData);
 
 		// StringBuilder stringBuilder = new StringBuilder(temp);
 
@@ -53,7 +55,7 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 		// horzData = reArrange(horzData);
 		// Create the adapters for the gridviews
 		horzGridViewAdapter = new HorzGridViewAdapter(mContext,
-				R.layout.model_layout, horzData);
+				R.layout.model_layout, horzDataArranged);
 
 		// horzGridViewAdapter = new HorzGridViewAdapter(mContext, horzData);
 
@@ -65,19 +67,15 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 			@Override
 			public void onItemClick(TwoWayAdapterView<?> parent, View view,
 					int position, long id) {
-				Toast.makeText(mContext, "clicked " + position,
-						Toast.LENGTH_SHORT).show();
-				RelativeLayout layout = (RelativeLayout) view
-						.findViewById(R.id.layout);
-
-				if (horzData.get(position).isOnFocus()) {
-					layout.setBackgroundColor(Color.argb(0, 0x00, 0x99,
-							0xcc));
-					horzData.get(position).setOnFocus(false);
+//				Toast.makeText(mContext, "clicked " + position,
+//						Toast.LENGTH_SHORT).show();
+				ImageView bg = (ImageView)view.findViewById(R.id.bg);
+				if (horzDataArranged.get(position).isOnFocus()) {
+					bg.setAlpha(100);
+					horzDataArranged.get(position).setOnFocus(false);
 				} else {
-					layout.setBackgroundColor(Color.argb(255, 0x00, 0x99,
-							0xcc));
-					horzData.get(position).setOnFocus(true);
+					bg.setAlpha(0);
+					horzDataArranged.get(position).setOnFocus(true);
 				}
 
 				// ImageView image =
