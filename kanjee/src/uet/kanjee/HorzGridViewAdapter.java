@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import uet.kanjee.RadicalsFragment;
 public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
@@ -32,12 +33,10 @@ public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 
 		rows = 8;
 		columns = 1;
-//		rowHeight = 100;
-//		columnWidth=100;
 		size =(int)(MainActivity.screenHeight*0.92)/rows;
 		RadicalsFragment.horzGridView.setNumRows(rows);
-		//RadicalsFragment.horzGridView.setRowHeight(size);
-		//RadicalsFragment.horzGridView.setColumnWidth(size);
+//		RadicalsFragment.horzGridView.setRowHeight(size);
+//		RadicalsFragment.horzGridView.setColumnWidth(size);
 	}
 
 
@@ -52,26 +51,12 @@ public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 	private int rowHeight;
 	private int size;
 
-//	public HorzGridViewAdapter(Context context,ArrayList<KRadical> data){
-//		this.mContext = context;
-//		this.data = data;
-//
-//		rows = 8;
-//		columns = 1;
-//		rowHeight = 100;
-//		columnWidth=100;
-//		RadicalsFragment.horzGridView.setNumRows(rows);
-//		RadicalsFragment.horzGridView.setRowHeight(rowHeight);
-//	}
 
-
-	@SuppressWarnings("deprecation")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		//Get the data for the given position in the array
 		KRadical thisData = data.get(position);
-		TextView header = new TextView(mContext);
-		TextView content = new TextView(mContext);
+		ViewHandler handler;
 		//Use a viewHandler to improve performance
 		
 		//If reusing a view get the handler info; if view is null, create it
@@ -80,30 +65,47 @@ public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 			//Only get the inflater when it's needed, then release it-which isn't frequently
 			LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = inflater.inflate(R.layout.model_layout , parent, false);
-			
-		}
-		
-		content = (TextView) convertView.findViewById(R.id.content);
-		KRadical curRadical = data.get(position);
-		
-		
-		content.setTypeface(MainActivity.font);
-		content.setText(thisData.getText());
-		content.setTextSize(size/4);
-		
-		if(curRadical.isFilled()){
-			content.setVisibility(View.INVISIBLE);
+			handler = new ViewHandler();
+			handler.rl = (RelativeLayout) convertView.findViewById(R.id.layout);
+			handler.tv = (TextView) convertView.findViewById(R.id.content);
+			convertView.setTag(handler);
 			
 		}else{
-			content.setVisibility(View.VISIBLE);
+			handler = (ViewHandler) convertView.getTag();
 		}
-		if(curRadical.isHeader()){
-			content.setText(String.valueOf(curRadical.getNumStrokes()));
+		handler.tv.setTypeface(MainActivity.font);
+		handler.tv.setText(thisData.getText());
+		handler.tv.setTextSize(size/4);
+		
+		if(thisData.isOnFocus()){
+			handler.rl.setBackgroundColor(Color.rgb(0, 255, 0)); //xanh
 		}else{
+			handler.rl.setBackgroundColor(Color.rgb(158, 255, 158)); //xanh nhat
 		}
+		if(thisData.isOnSelect()){
+			handler.rl.setBackgroundColor(Color.rgb(255, 200, 59)); //cam
+		}
+		else{
+			handler.rl.setBackgroundColor(Color.rgb(0, 255, 0)); //xanh
+		}
+		if(thisData.isFilled()){
+			handler.tv.setVisibility(View.INVISIBLE);
+			
+		}else{
+			handler.tv.setVisibility(View.VISIBLE);
+		}
+		if(thisData.isHeader()){
+			handler.tv.setText(String.valueOf(thisData.getNumStrokes()));
+		}
+//		FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(columnWidth, rowHeight);// convertView.getLayoutParams();
+//		handler.tv.setLayoutParams(lp);
 		return convertView;
 	}
 	
+	public class ViewHandler{
+		RelativeLayout rl;
+		TextView tv;
+	}
 
 	@Override
 	public int getCount() {

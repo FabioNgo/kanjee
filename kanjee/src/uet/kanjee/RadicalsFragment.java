@@ -28,7 +28,7 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 	public static TwoWayGridView horzGridView;
 	private ArrayList<KRadical> horzData;
 	ArrayList<KRadical> horzDataArranged;
-	ArrayList<KRadical> radicalsSelected;
+	ArrayList<Integer> radicalsSelected=new ArrayList<Integer>(); //vi tri (int) cua cac chu dang dc chon
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -65,22 +65,36 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 	}
 	
 	public void doOnClick(View view, int position) {
-		RelativeLayout fl = (RelativeLayout) view.findViewById(R.id.layout);
-//		if (horzDataArranged.get(position).isOnFocus()) {
-//			bg.setAlpha(180);
-//			horzDataArranged.get(position).setOnFocus(false);
-//		} else {
-//			bg.setAlpha(0);
-//			horzDataArranged.get(position).setOnFocus(true);
-//		}
-		if (!horzDataArranged.get(position).isOnSelect()) {
-			fl.setBackgroundColor(Color.rgb(254, 255, 113));
-			horzDataArranged.get(position).setOnSelect(false);
-		} else {
-			fl.setBackgroundColor(Color.rgb(211, 88, 247));
-			horzDataArranged.get(position).setOnSelect(true);
-
+		int i=0,j=0;
+		if(!(horzDataArranged.get(position).isFilled() || horzDataArranged.get(position).isHeader())){
+			if(!horzDataArranged.get(position).isOnSelect()){
+				radicalsSelected.add((Integer)position);
+				horzDataArranged.get(position).setOnSelect(true);
+			}
+			else{
+				radicalsSelected.remove((Integer)position);
+				horzDataArranged.get(position).setOnSelect(false);
+			}
+			if(radicalsSelected.isEmpty()){
+				for(i=0;i<horzDataArranged.size();i++){
+					horzDataArranged.get(i).setOnFocus(true);
+					horzDataArranged.get(i).setOnSelect(false);
+				}
+			}
+			else{
+				for(i=0;i<horzDataArranged.size();i++){
+					if(!(horzDataArranged.get(i).isFilled() || horzDataArranged.get(i).isHeader())){
+//						if(MainActivity.db.getRelatedRadicals(horzDataArranged.get(position)).contains(horzDataArranged.get(i))){
+//							if(!(horzDataArranged.get(i).isFilled() || horzDataArranged.get(i).isHeader())){
+//								horzDataArranged.get(i).setOnFocus(false);
+//							}
+//						}
+					}
+				}
+				horzDataArranged.get(position).setOnFocus(true);
+			}
 		}
+		horzGridViewAdapter.notifyDataSetChanged();
 	}
 	private ArrayList<KRadical> reArrange(ArrayList<KRadical> horzData) {
 		// TODO Auto-generated method stub
@@ -129,32 +143,4 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 	public void onClick(View v) {
 
 	}
-
-	// private ArrayList<KRadical> generateGridViewObjects() {
-	//
-	// ArrayList<KRadical> allData = new ArrayList<KRadical>();
-	//
-	// String name;
-	// int color;
-	// int red;
-	// int green;
-	// int blue;
-	// Random rn = new Random();
-	//
-	// for (int i = 0; i < 500; i++) {
-	// // Get random data for use during testing
-	//
-	// red = rn.nextInt();
-	// blue = rn.nextInt();
-	// green = rn.nextInt();
-	//
-	// // Generate data from random info
-	// color = Color.argb(255, red, green, blue);
-	// name = ""+i;
-	//
-	// KRadical singleObject = new KRadical(name, color);
-	// allData.add(singleObject);
-	// }
-	// return allData;
-	// }
 }

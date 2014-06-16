@@ -159,6 +159,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		List<KRadical> radicals = new ArrayList<KRadical>();
 		/**
 		 * get information of related Radicals
+		 * trả về ArrayList<Integer> các id của các chữ mà có thể ghép với nó tạo thành 1 character có nghĩa
 		 */
 		String query = "SELECT * FROM `RADICALS` WHERE `NUMSTROKE` LIKE '"
 				+ String.valueOf(radical.getNumStrokes()) + ";";

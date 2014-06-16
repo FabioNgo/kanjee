@@ -52,7 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignTop="@+id/framelayout1"
-        android:content="@+id/content"
+        android:content="@+id/slidingdrawer_content"
         android:handle="@+id/handle" >
 
         <Button
@@ -62,7 +62,7 @@
             android:text="Handle" />
 
         <LinearLayout
-            android:id="@+id/content"
+            android:id="@+id/slidingdrawer_content"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
