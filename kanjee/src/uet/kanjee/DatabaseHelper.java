@@ -59,8 +59,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	 * 
 	 * @return the array of all characters in database
 	 */
-	public List<KCharacter> getAllChars() {
-		List<KCharacter> chars = new ArrayList<KCharacter>();
+	public ArrayList<KCharacter> getAllChars() {
+		ArrayList<KCharacter> chars = new ArrayList<KCharacter>();
 		String selectQuery = "SELECT  * FROM " + "CHARACTERS";
 		Cursor c = myDatabase.rawQuery(selectQuery, null);
 		// looping through all rows and adding to list
@@ -76,6 +76,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 						.getColumnIndex("OTHER")));
 				// adding to tags list
 				chars.add(character);
+				//Log.d("character", chars.get(chars.size()-1).getText());
 			} while (c.moveToNext());
 		}
 		return chars;
@@ -105,35 +106,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 	/**
 	 * 
-	 * @return the array of all characters in database
+	 * @param character
+	 * @return all radicals combining to the character
 	 */
-	public List<KRadical> getRelatedRadicals(KCharacter character) {
-		List<Integer> relatedRadicalsIds = new ArrayList<Integer>();
-		List<KRadical> radicals = new ArrayList<KRadical>();
+	public ArrayList<KRadical> getRelatedRadicals(KCharacter character) {
+		ArrayList<String> relatedRadicalsTexts = new ArrayList<String>();
+		ArrayList<KRadical> radicals = new ArrayList<KRadical>();
 		/**
 		 * get all ID of related Radicals
 		 */
-		String selectQuery = "SELECT * FROM `RADICALS_CHARS_REL` WHERE `RAD_ID` LIKE '" 
-		+ String.valueOf(character.getId())
+		String selectQuery = "SELECT * FROM `RADICALS_CHARS_REL` WHERE `CHAR` LIKE '" 
+		+ String.valueOf(character.getText())
 		+ "' ORDER BY `ID`;";
 		Cursor c = myDatabase.rawQuery(selectQuery, null);
 		// looping through all rows and adding to list
 		if (c.moveToFirst()) {
 			do {
-				Integer id = Integer.valueOf(c.getInt(c.getColumnIndex("RAD_ID")));
+				String text = c.getString(c.getColumnIndex("RAD"));
 				// adding to tags list
-				relatedRadicalsIds.add(id);
+				relatedRadicalsTexts.add(text);
 			} while (c.moveToNext());
 		}
 		/**
 		 * get information of related Radicals
 		 */
 		
-		for(int i=0; i<relatedRadicalsIds.size();i++ ){
+		for(int i=0; i<relatedRadicalsTexts.size();i++ ){
 			
-			String query = "SELECT * FROM `RADICALS` WHERE `ID` LIKE '" 
-					+ String.valueOf(relatedRadicalsIds.get(i))
-					+ ";";
+			String query = "SELECT * FROM `RADICALS` WHERE `TEXT` LIKE '" 
+					+ String.valueOf(relatedRadicalsTexts.get(i))
+					+ "';";
 			Cursor cursor = myDatabase.rawQuery(query, null);
 			// looping through all rows and adding to list
 			if (cursor.moveToFirst()) {
@@ -145,6 +147,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 							);
 					 //adding to tags list
 					radicals.add(radical);
+					Log.d("Related Radical: "+character.getText(), radicals.get(radicals.size()-1).getText());
 				} while (cursor.moveToNext());
 			}
 		}
@@ -155,14 +158,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	 * @param character
 	 * @return
 	 */
-	public List<KRadical> getRelatedRadicals(KRadical radical) {
-		List<KRadical> radicals = new ArrayList<KRadical>();
-		/**
-		 * get information of related Radicals
-		 * trả về ArrayList<Integer> các id của các chữ mà có thể ghép với nó tạo thành 1 character có nghĩa
-		 */
+	public ArrayList<KRadical> getSimillarNumStrokeRadicals(KRadical radical) {
+		ArrayList<KRadical> radicals = new ArrayList<KRadical>();
+		
 		String query = "SELECT * FROM `RADICALS` WHERE `NUMSTROKE` LIKE '"
-				+ String.valueOf(radical.getNumStrokes()) + ";";
+				+ String.valueOf(radical.getNumStrokes()) + "';";
 		Cursor cursor = myDatabase.rawQuery(query, null);
 		// looping through all rows and adding to list
 		if (cursor.moveToFirst()) {
@@ -176,6 +176,52 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			} while (cursor.moveToNext());
 		}
 		return radicals;
+	}
+	/**
+	 * 
+	 * @param radical
+	 * @return all character contains the radical
+	 */
+	public ArrayList<KCharacter> getCharContainingRadical(KRadical radical) {
+		ArrayList<KCharacter> characters = new ArrayList<KCharacter>();
+		ArrayList<String> relatedChars = new ArrayList<String>();
+		String query = "SELECT * FROM `RADICALS_CHARS_REL` WHERE `RAD` LIKE '"
+				+ String.valueOf(radical.getText()) 
+				+ "' ORDER BY `ID`;";
+		Cursor c = myDatabase.rawQuery(query, null);
+		// looping through all rows and adding to list
+		if (c.moveToFirst()) {
+			do {
+				String text = c.getString(c.getColumnIndex("CHAR"));
+				// adding to tags list
+				relatedChars.add(text);
+			} while (c.moveToNext());
+		}
+		/**
+		 * get information of related Characters
+		 */
+		
+		for(int i=0; i<relatedChars.size();i++ ){
+			
+			String query2 = "SELECT * FROM `CHARACTERS` WHERE `TEXT` LIKE '" 
+					+ String.valueOf(relatedChars.get(i))
+					+ "';";
+			Cursor cursor = myDatabase.rawQuery(query, null);
+			// looping through all rows and adding to list
+			if (cursor.moveToFirst()) {
+				do {
+					KCharacter character = new KCharacter(cursor.getInt(cursor
+							.getColumnIndex("ID")), cursor.getInt(cursor
+							.getColumnIndex("NUMSTROKES")), cursor.getString(cursor
+							.getColumnIndex("TEXT")), cursor.getString(cursor
+							.getColumnIndex("PINYIN")), cursor.getString(cursor
+							.getColumnIndex("MEANING")), cursor.getString(cursor
+							.getColumnIndex("OTHER")));
+					characters.add(character);
+				} while (cursor.moveToNext());
+			}
+		}
+		return characters;
 	}
 	/*
 	 * (non-Javadoc)
