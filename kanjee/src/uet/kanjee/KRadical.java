@@ -16,88 +16,101 @@ public class KRadical {
 	private String text;
 	private boolean isHeader;
 	private boolean isFilled;
+
 	public KRadical() {
 		// TODO Auto-generated constructor stub
 		setId("-1");
 		setNumStrokes(-1);
-		onSelect=false;
-		onFocus=true;
+		onSelect = false;
+		onFocus = true;
 		setText("");
 	}
-	
+
 	public KRadical(String id, int color) {
 		this.id = id;
 		this.color = color;
-		onSelect=false;
-		onFocus=true;
-		
+		onSelect = false;
+		onFocus = true;
+
 	}
-	public KRadical(String id, int numStrokes, String text){
-		onFocus=true;
+
+	public KRadical(String id, int numStrokes, String text) {
+		onFocus = true;
 		this.setId(id);
 		this.setNumStrokes(numStrokes);
 		this.setText(text);
 		this.isHeader = false;
-		this.isFilled =false;
-		
+		this.isFilled = false;
+
 	}
-	public KRadical(KRadical radical,boolean isHeader,boolean isFilled){
-		onFocus=true;
+
+	public KRadical(KRadical radical, boolean isHeader, boolean isFilled) {
+		onFocus = true;
 		this.setId(radical.getId());
 		this.setNumStrokes(radical.getNumStrokes());
 		this.setText(radical.getText());
 		this.isFilled = isFilled;
 		this.isHeader = isHeader;
-		
+
 	}
+
 	/**
 	 * @return the id
 	 */
 	public String getId() {
 		return id;
 	}
+
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(String id) {
 		this.id = id;
 	}
+
 	/**
 	 * @return the numStrokes
 	 */
 	public int getNumStrokes() {
 		return numStrokes;
 	}
+
 	/**
-	 * @param numStrokes the numStrokes to set
+	 * @param numStrokes
+	 *            the numStrokes to set
 	 */
 	public void setNumStrokes(int numStrokes) {
 		this.numStrokes = numStrokes;
 	}
-	
-	
-	
+
 	/**
 	 * @return the image
 	 */
-	
 
 	public boolean isOnSelect() {
 		return onSelect;
 	}
 
 	public void setOnSelect(boolean onSelect) {
-		this.onSelect = onSelect;
-	}
+		if (this.isFilled && this.isHeader) {
 
-	
+		} else {
+			this.onSelect = onSelect;
+		}
+	}
 
 	public boolean isOnFocus() {
 		return onFocus;
 	}
 
 	public void setOnFocus(boolean onFocus) {
-		this.onFocus = onFocus;
+		if (this.isFilled && this.isHeader) {
+
+		} else {
+			this.onFocus = onFocus;
+		}
+
 	}
 
 	/**
@@ -108,7 +121,8 @@ public class KRadical {
 	}
 
 	/**
-	 * @param text the text to set
+	 * @param text
+	 *            the text to set
 	 */
 	public void setText(String text) {
 		this.text = text;
@@ -127,6 +141,5 @@ public class KRadical {
 	public boolean isFilled() {
 		return isFilled;
 	}
-
 
 }

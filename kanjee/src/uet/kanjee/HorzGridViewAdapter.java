@@ -6,6 +6,7 @@ import java.util.List;
 import com.jess.ui.TwoWayAdapterView;
 import com.jess.ui.TwoWayAdapterView.OnItemClickListener;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.CursorWrapper;
 import android.graphics.Color;
@@ -35,8 +36,9 @@ public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 		columns = 1;
 		size =(int)(MainActivity.screenHeight*0.92)/rows;
 		RadicalsFragment.horzGridView.setNumRows(rows);
+		
 //		RadicalsFragment.horzGridView.setRowHeight(size);
-//		RadicalsFragment.horzGridView.setColumnWidth(size);
+//		RadicalsFragment.horzGridView
 	}
 
 
@@ -52,6 +54,7 @@ public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 	private int size;
 
 
+	@SuppressLint("NewApi")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		//Get the data for the given position in the array
@@ -73,21 +76,24 @@ public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 		}else{
 			handler = (ViewHandler) convertView.getTag();
 		}
+		RelativeLayout relativeLayout = (RelativeLayout)convertView.findViewById(R.id.layout);
+		relativeLayout.getLayoutParams().width = size;
 		handler.tv.setTypeface(MainActivity.font);
 		handler.tv.setText(thisData.getText());
 		handler.tv.setTextSize(size/4);
 		
 		if(thisData.isOnFocus()){
 			handler.rl.setBackgroundColor(Color.rgb(0, 255, 0)); //xanh
+			
 		}else{
-			handler.rl.setBackgroundColor(Color.rgb(158, 255, 158)); //xanh nhat
+			handler.rl.setBackgroundColor(Color.argb(50,0, 255, 0)); //xanh //xanh nhat
 		}
-		if(thisData.isOnSelect()){
-			handler.rl.setBackgroundColor(Color.rgb(255, 200, 59)); //cam
-		}
-		else{
-			handler.rl.setBackgroundColor(Color.rgb(0, 255, 0)); //xanh
-		}
+//		if(thisData.isOnSelect()){
+//			handler.rl.setBackgroundColor(Color.rgb(255, 200, 59)); //cam
+//		}
+//		else{
+//			handler.rl.setBackgroundColor(Color.rgb(0, 255, 0));
+//		}
 		if(thisData.isFilled()){
 			handler.tv.setVisibility(View.INVISIBLE);
 			

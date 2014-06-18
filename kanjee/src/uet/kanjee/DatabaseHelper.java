@@ -206,7 +206,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			String query2 = "SELECT * FROM `CHARACTERS` WHERE `TEXT` LIKE '" 
 					+ String.valueOf(relatedChars.get(i))
 					+ "';";
-			Cursor cursor = myDatabase.rawQuery(query, null);
+			Cursor cursor = myDatabase.rawQuery(query2, null);
 			// looping through all rows and adding to list
 			if (cursor.moveToFirst()) {
 				do {
