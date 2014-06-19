@@ -7,7 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
-public class KRadical {
+public class KRadical{
 	private String id;
 	private int color;
 	private boolean onFocus;
@@ -46,7 +46,11 @@ public class KRadical {
 
 	public KRadical(KRadical radical, boolean isHeader, boolean isFilled) {
 		onFocus = true;
-		this.setId(radical.getId());
+		if(isHeader||isFilled){
+			id = "";
+		}else{
+			this.setId(radical.getId());
+		}
 		this.setNumStrokes(radical.getNumStrokes());
 		this.setText(radical.getText());
 		this.isFilled = isFilled;
@@ -140,6 +144,18 @@ public class KRadical {
 	 */
 	public boolean isFilled() {
 		return isFilled;
+	}
+
+	@Override
+	public boolean equals(Object other){
+	    if (other == null) return false;
+	    if(other instanceof KRadical){
+	    	if(this.getId()!="" || ((KRadical)other).getId()!="") return false;
+	    	else {
+	    		return this.getId().equals(((KRadical) other).getId());
+	    	}
+	    }
+	    return false;
 	}
 
 }
