@@ -64,10 +64,7 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 					int position, long id) {
 				Toast.makeText(mContext, "clicked " + position,
 						Toast.LENGTH_SHORT).show();
-			 KRadical temp = 	horzDataArranged.get(1);
-			 temp.setOnFocus(false);
-				horzGridViewAdapter.notifyDataSetChanged();
-//				doOnClick(view, position);
+				doOnClick(view, position);
 			}
 		});
 		return view;
@@ -88,6 +85,17 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 		return relatedRadicals;
 		
 	}
+	
+	int findPositionById(ArrayList<KRadical> list,String id){
+		for(int i=0;i<list.size();i++){
+			if(list.get(i).getId().equals(id)){
+				return i;
+			}
+		}
+		Log.e("",id+" id not found");
+		return -1;
+	}
+	
 	public void doOnClick(View view, int position) {
 		int i = 0, j = 0;
 		
@@ -107,13 +115,11 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 					horzDataArranged.get(i).setOnSelect(false);
 				}
 			} else {
-//				for (i = 0; i < horzDataArranged.size(); i++) {
-////					if(relatedRadicals.contains(horzDataArranged.get(i))){
-//						horzDataArranged.get(i).setOnFocus(false);
-////					}
-//				}
-				
-				Log.e("","xxxxxxx");
+				for (i = 0; i < horzDataArranged.size(); i++) {
+					if(relatedRadicals.contains(horzDataArranged.get(i))){
+						horzDataArranged.get(i).setOnFocus(false);
+					}
+				}
 			}
 			horzDataArranged.get(position).setOnFocus(true);
 		}

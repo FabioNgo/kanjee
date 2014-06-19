@@ -78,22 +78,21 @@ public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 		}
 		RelativeLayout relativeLayout = (RelativeLayout)convertView.findViewById(R.id.layout);
 		relativeLayout.getLayoutParams().width = size;
-		handler.tv.setTypeface(MainActivity.font);
+		handler.tv.setTypeface(MainActivity.font,Typeface.BOLD);
 		handler.tv.setText(thisData.getText());
 		handler.tv.setTextSize(size/4);
 		
 		if(thisData.isOnFocus()){
-			handler.rl.setBackgroundColor(Color.rgb(0, 255, 0)); //xanh
-			
+			if(thisData.isOnSelect()){
+				handler.rl.setBackgroundColor(Color.argb(255,255, 200, 59)); //cam 
+			}
+			else{
+				handler.rl.setBackgroundColor(Color.argb(255,0, 255, 0)); //xanh
+			}
 		}else{
-			handler.rl.setBackgroundColor(Color.argb(50,0, 255, 0)); //xanh //xanh nhat
+			handler.rl.setBackgroundColor(Color.argb(50,0, 255, 0)); //xanh 50/255
 		}
-//		if(thisData.isOnSelect()){
-//			handler.rl.setBackgroundColor(Color.rgb(255, 200, 59)); //cam
-//		}
-//		else{
-//			handler.rl.setBackgroundColor(Color.rgb(0, 255, 0));
-//		}
+		
 		if(thisData.isFilled()){
 			handler.tv.setVisibility(View.INVISIBLE);
 			
