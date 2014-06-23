@@ -97,9 +97,7 @@ public class KRadical{
 	}
 
 	public void setOnSelect(boolean onSelect) {
-		if (this.isFilled && this.isHeader) {
-
-		} else {
+		if (!(this.isFilled || this.isHeader)) {
 			this.onSelect = onSelect;
 		}
 	}
@@ -109,12 +107,9 @@ public class KRadical{
 	}
 
 	public void setOnFocus(boolean onFocus) {
-		if (this.isFilled && this.isHeader) {
-
-		} else {
+		if (!this.isHeader) {
 			this.onFocus = onFocus;
 		}
-
 	}
 
 	/**
@@ -145,17 +140,4 @@ public class KRadical{
 	public boolean isFilled() {
 		return isFilled;
 	}
-
-	@Override
-	public boolean equals(Object other){
-	    if (other == null) return false;
-	    if(other instanceof KRadical){
-	    	if(this.getId()!="" || ((KRadical)other).getId()!="") return false;
-	    	else {
-	    		return this.getId().equals(((KRadical) other).getId());
-	    	}
-	    }
-	    return false;
-	}
-
 }

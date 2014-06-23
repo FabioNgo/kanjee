@@ -14,6 +14,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
+import android.widget.SlidingDrawer;
 
 public class Menu1FragmentActivity extends FragmentActivity implements
 		OnClickListener {
@@ -23,6 +24,13 @@ public class Menu1FragmentActivity extends FragmentActivity implements
 	
 	Fragment menu1Fragment1;
 	Fragment detailCharacterFragment;
+	public SlidingDrawer slidingDrawer;
+	public Button slidingButton;
+//	public static getSD(){
+//		if(SlidingDrawer==null){
+//			slidingDrawer = new SlidingDrawer(getInstance(), attrs)
+//		}
+//	}
 	ViewPager viewPager1;
 	Button bt_back;
 	Button bt_reset;
@@ -53,6 +61,9 @@ public class Menu1FragmentActivity extends FragmentActivity implements
 		bt_back = (Button) findViewById(R.id.bt_back);
 		bt_reset = (Button) findViewById(R.id.bt_reset);
 		bt_back.setOnClickListener(this);
+		
+//		slidingDrawer= (SlidingDrawer) findViewById(R.id.slidingDrawer1);
+//		slidingButton = (Button) findViewById(R.id.handle);
 	}
 
 	@Override
