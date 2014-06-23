@@ -3,16 +3,15 @@ package uet.kanjee;
 import java.util.ArrayList;
 
 import android.os.Bundle;
-import android.provider.CalendarContract.Instances;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.SlidingDrawer;
 
@@ -24,13 +23,10 @@ public class Menu1FragmentActivity extends FragmentActivity implements
 	
 	Fragment menu1Fragment1;
 	Fragment detailCharacterFragment;
-	public SlidingDrawer slidingDrawer;
-	public Button slidingButton;
-//	public static getSD(){
-//		if(SlidingDrawer==null){
-//			slidingDrawer = new SlidingDrawer(getInstance(), attrs)
-//		}
-//	}
+	public static SlidingDrawer slidingDrawer;
+	public static Button slidingButton;
+	public static GridView slidingGV;
+	
 	ViewPager viewPager1;
 	Button bt_back;
 	Button bt_reset;
@@ -62,8 +58,9 @@ public class Menu1FragmentActivity extends FragmentActivity implements
 		bt_reset = (Button) findViewById(R.id.bt_reset);
 		bt_back.setOnClickListener(this);
 		
-//		slidingDrawer= (SlidingDrawer) findViewById(R.id.slidingDrawer1);
-//		slidingButton = (Button) findViewById(R.id.handle);
+		slidingDrawer= (SlidingDrawer) findViewById(R.id.slidingDrawer1);
+		slidingButton = (Button) findViewById(R.id.handle);
+		slidingGV = (GridView)findViewById(R.id.gridView1);
 	}
 
 	@Override

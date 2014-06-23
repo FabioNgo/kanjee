@@ -20,6 +20,9 @@ public class KCharacter {
 		setOther("");
 		setRelatedRadicals(new ArrayList<KRadical>());
 	}
+	public KCharacter(String text){
+		setText(text);
+	}
 	public KCharacter(int id, int numStrokes, String text, String pinyin, String meaning, String other){
 		this.setId(id);
 		this.setNumStrokes(numStrokes);

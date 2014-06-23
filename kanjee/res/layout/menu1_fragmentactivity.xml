@@ -1,10 +1,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/RelativeLayout1"
-    android:padding="0dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="0dp"
     tools:context="com.example.japanapp01.Menu1FragmentActivity"
     tools:ignore="MergeRootFrame" >
 
@@ -12,10 +12,10 @@
         android:id="@+id/RelativeLayout2"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:padding="0dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:background="#00BFFF" >
+        android:background="#00BFFF"
+        android:padding="0dp" >
 
         <Button
             android:id="@+id/bt_back"
@@ -32,19 +32,17 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:text="Reset" />
-
     </RelativeLayout>
 
     <FrameLayout
         android:id="@+id/framelayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="0dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/RelativeLayout2" >
-
+        android:layout_below="@+id/RelativeLayout2"
+        android:padding="0dp" >
     </FrameLayout>
 
     <SlidingDrawer
@@ -59,14 +57,22 @@
             android:id="@+id/handle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Handle" />
+            android:text="No characters found" />
 
         <LinearLayout
             android:id="@+id/slidingdrawer_content"
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#ACFA58" >
+            android:background="#ACFA58"
+            android:orientation="vertical" >
+
+            <GridView
+                android:id="@+id/gridView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:numColumns="6"
+                android:padding="5dp" >
+            </GridView>
         </LinearLayout>
     </SlidingDrawer>
 
