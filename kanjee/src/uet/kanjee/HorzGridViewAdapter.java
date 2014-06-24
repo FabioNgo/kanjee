@@ -84,7 +84,7 @@ public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 		
 		if(thisData.isOnFocus()){
 			if(thisData.isOnSelect()){
-				handler.rl.setBackgroundColor(Color.argb(255,255, 200, 59)); //cam 
+				handler.rl.setBackgroundColor(Color.argb(255,0xfd,0x9a,0x00)); //cam 
 			}
 			else{
 				handler.rl.setBackgroundColor(Color.argb(255,0, 255, 0)); //xanh

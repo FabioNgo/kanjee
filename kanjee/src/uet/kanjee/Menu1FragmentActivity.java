@@ -14,7 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.SlidingDrawer;
-
+import android.support.v4.app.*;
 public class Menu1FragmentActivity extends FragmentActivity implements
 		OnClickListener {
 
@@ -25,7 +25,7 @@ public class Menu1FragmentActivity extends FragmentActivity implements
 	Fragment detailCharacterFragment;
 	public static SlidingDrawer slidingDrawer;
 	public static Button slidingButton;
-	public static GridView slidingGV;
+	//public static GridView slidingGV;
 	
 	ViewPager viewPager1;
 	Button bt_back;
@@ -59,8 +59,9 @@ public class Menu1FragmentActivity extends FragmentActivity implements
 		bt_back.setOnClickListener(this);
 		
 		slidingDrawer= (SlidingDrawer) findViewById(R.id.slidingDrawer1);
+		
 		slidingButton = (Button) findViewById(R.id.handle);
-		slidingGV = (GridView)findViewById(R.id.gridView1);
+		//slidingGV = (GridView)findViewById(R.id.gridView1);
 	}
 
 	@Override

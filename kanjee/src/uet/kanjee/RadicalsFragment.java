@@ -1,6 +1,7 @@
 package uet.kanjee;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -55,10 +56,10 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 		horzGridView = (TwoWayGridView) view.findViewById(R.id.horz_gridview);
 		slidingButton = Menu1FragmentActivity.slidingButton;
 		slidingDrawer = Menu1FragmentActivity.slidingDrawer;
-		slidingGV = Menu1FragmentActivity.slidingGV;
+		//slidingGV = Menu1FragmentActivity.slidingGV;
 		
-		myGridViewAdapter = new MyGridViewAdapter(mContext, R.layout.model_layout, relatedCharacters);
-		slidingGV.setAdapter(myGridViewAdapter);
+//		myGridViewAdapter = new MyGridViewAdapter(mContext, R.layout.model_layout, relatedCharacters);
+//		slidingGV.setAdapter(myGridViewAdapter);
 		
 		horzGridView.setColumnWidth(MainActivity.screenHeight / 8);
 		horzData = (ArrayList<KRadical>) MainActivity.db.getAllRadicals();
@@ -84,11 +85,13 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 					selectedRadicals.add(horzDataArranged.get(posRadicalsSelected.get(i)));
 				}
 				relatedCharacters = getRelatedChars(selectedRadicals);
-				relatedCharacters.add(new KCharacter("ssssss"));
+				//relatedCharacters.add(new KCharacter());
 				for(int i=0;i<relatedCharacters.size();i++){
 					Log.e("",relatedCharacters.get(i).getText()+ " ");
 				}
 				slidingButton.setText(relatedCharacters.size()+" characters found");
+				RelatedCharsFragment f = new RelatedCharsFragment(relatedCharacters);
+				getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, f).commit();
 //				String a="";
 //				for(int i=0;i<posRadicalsSelected.size();i++){
 //					a += horzDataArranged.get(posRadicalsSelected.get(i)).getText() + " ";
@@ -97,7 +100,7 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 //				for(int i=0;i<relatedCharacters.size();i++){
 //					Log.e("",relatedCharacters.get(i).getText());
 //				}
-				myGridViewAdapter.notifyDataSetChanged();
+				
 			}
 		});
 		return view;
@@ -168,7 +171,7 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 //				Log.e("",radicalsSelected.size()+ " "+arrayOfRelatedRadicals.size());
 				for (int i = 0; i < horzDataArranged.size(); i++) {
 					for(int j=0;j<posRadicalsSelected.size();j++){
-						if(!conTains(arrayOfRelatedRadicals.get(j), horzDataArranged.get(i))){
+						if(!(arrayOfRelatedRadicals.get(j).contains(horzDataArranged.get(i)))){
 							horzDataArranged.get(i).setOnFocus(false);
 						}else{
 							horzDataArranged.get(i).setOnFocus(true);
@@ -184,14 +187,7 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 		horzGridViewAdapter.notifyDataSetChanged();
 	}
 
-	boolean conTains(ArrayList<KRadical> arr, KRadical kra) {
-		for (int i = 0; i < arr.size(); i++) {
-			if (arr.get(i).getText().equals(kra.getText())) {
-				return true;
-			}
-		}
-		return false;
-	}
+
 	//ham in ra atribute cua cac radical
 	void abc(ArrayList<KRadical> c) {
 		String b = "";

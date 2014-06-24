@@ -68,7 +68,7 @@ public class MainActivity extends Activity implements OnClickListener{
 	    try {
 	        files = assetManager.list("");
 	    } catch (IOException e) {
-	        Log.e("tag", "Failed to get asset file list.", e);
+	        //Log.e("tag", "Failed to get asset file list.", e);
 	    }
 	    for(String filename : files) {
 	        InputStream in = null;
@@ -85,7 +85,7 @@ public class MainActivity extends Activity implements OnClickListener{
 	          out.close();
 	          out = null;
 	        } catch(IOException e) {
-	            Log.e("tag", "Failed to copy asset file: " + filename, e);
+	            //Log.e("tag", "Failed to copy asset file: " + filename, e);
 	        }       
 	    }
 	}
