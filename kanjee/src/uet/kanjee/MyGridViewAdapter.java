@@ -1,8 +1,10 @@
 package uet.kanjee;
 
 import java.util.ArrayList;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +37,7 @@ public class MyGridViewAdapter extends ArrayAdapter<KCharacter>{
 			handler = new ViewHandler();
 			handler.rl = (RelativeLayout) convertView.findViewById(R.id.layout);
 			handler.tv = (TextView) convertView.findViewById(R.id.content);
+			handler.tv.setTypeface(MainActivity.font,Typeface.BOLD);
 			convertView.setTag(handler);
 			
 		}else{

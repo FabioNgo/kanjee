@@ -93,15 +93,9 @@ public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 			handler.rl.setBackgroundColor(Color.argb(50,0, 255, 0)); //xanh 50/255
 		}
 		
-		if(thisData.isFilled()){
-			handler.tv.setVisibility(View.INVISIBLE);
-			
-		}else{
-			handler.tv.setVisibility(View.VISIBLE);
-		}
-		if(thisData.isHeader()){
-			handler.tv.setText(String.valueOf(thisData.getNumStrokes()));
-		}
+//		if(thisData.isHeader()){
+//			handler.tv.setText(String.valueOf(thisData.getNumStrokes()));
+//		}
 //		FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(columnWidth, rowHeight);// convertView.getLayoutParams();
 //		handler.tv.setLayoutParams(lp);
 		return convertView;

@@ -115,4 +115,11 @@ public class KCharacter {
 	public void setRelatedRadicals(ArrayList<KRadical> relatedRadicals) {
 		this.relatedRadicals = relatedRadicals;
 	}
+	@Override
+	public boolean equals(Object other) {
+		if (other == null || !(other instanceof KCharacter))
+			return false;
+		return this.getText().equals(((KCharacter) other).getText());
+
+	}
 }

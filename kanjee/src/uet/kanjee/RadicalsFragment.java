@@ -171,7 +171,7 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 //				Log.e("",radicalsSelected.size()+ " "+arrayOfRelatedRadicals.size());
 				for (int i = 0; i < horzDataArranged.size(); i++) {
 					for(int j=0;j<posRadicalsSelected.size();j++){
-						if(!conTains(arrayOfRelatedRadicals.get(j), horzDataArranged.get(i))){
+						if(!(arrayOfRelatedRadicals.get(j).contains(horzDataArranged.get(i)))){
 							horzDataArranged.get(i).setOnFocus(false);
 						}else{
 							horzDataArranged.get(i).setOnFocus(true);
@@ -188,14 +188,7 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 		horzGridViewAdapter.notifyDataSetChanged();
 	}
 
-	boolean conTains(ArrayList<KRadical> arr, KRadical kra) {
-		for (int i = 0; i < arr.size(); i++) {
-			if (arr.get(i).getText().equals(kra.getText())) {
-				return true;
-			}
-		}
-		return false;
-	}
+	
 	
 	//ham in ra atribute cua cac radical
 	void abc(ArrayList<KRadical> c) {
