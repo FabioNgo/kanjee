@@ -36,7 +36,10 @@ public class MyGridViewAdapter extends ArrayAdapter<KCharacter>{
 			convertView = inflater.inflate(R.layout.model_layout , parent, false);
 			handler = new ViewHandler();
 			handler.rl = (RelativeLayout) convertView.findViewById(R.id.layout);
+			handler.rl.getLayoutParams().height = MainActivity.screenWidth/5;
 			handler.tv = (TextView) convertView.findViewById(R.id.content);
+			//handler.tv.setTextSize(MainActivity.screenWidth/30);
+			
 			handler.tv.setTypeface(MainActivity.font,Typeface.BOLD);
 			convertView.setTag(handler);
 			

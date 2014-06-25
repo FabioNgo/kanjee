@@ -34,7 +34,9 @@ public class RelatedCharsFragment extends Fragment {
 			view = inflater.inflate(R.layout.sliding, container,
 					false);
 		}
-		GridView gridView = (GridView)view.findViewById(R.id.charsGriddView);
+		GridView gridView = (GridView)view.findViewById(R.id.charsGridView);
+		//gridView.setNumColumns(6);
+		//gridView.
 		MyGridViewAdapter adapter = new MyGridViewAdapter(getActivity(), R.layout.model_layout, chars);
 		gridView.setAdapter(adapter);
 		return view;
