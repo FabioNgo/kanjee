@@ -78,6 +78,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				chars.add(character);
 				//Log.d("character", chars.get(chars.size()-1).getText());
 			} while (c.moveToNext());
+			c.close();
 		}
 		return chars;
 	}
@@ -101,6 +102,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				// adding to tags list
 				radicals.add(radical);
 			} while (c.moveToNext());
+			c.close();
 		}
 		return radicals;
 	}
@@ -126,6 +128,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				// adding to tags list
 				relatedRadicalsTexts.add(text);
 			} while (c.moveToNext());
+			c.close();
 		}
 		/**
 		 * get information of related Radicals
@@ -149,6 +152,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 					radicals.add(radical);
 					Log.d("Related Radical: "+character.getText(), radicals.get(radicals.size()-1).getText());
 				} while (cursor.moveToNext());
+				cursor.close();
 			}
 		}
 		return radicals;
@@ -174,6 +178,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				 
 				radicals.add(tempRadical);
 			} while (cursor.moveToNext());
+			cursor.close();
 		}
 		return radicals;
 	}
@@ -196,17 +201,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				// adding to tags list
 				relatedChars.add(text);
 			} while (c.moveToNext());
+			c.close();
 		}
 		/**
 		 * get information of related Characters
 		 */
-		
+		Cursor cursor = null;
 		for(int i=0; i<relatedChars.size();i++ ){
 			
 			String query2 = "SELECT * FROM `CHARACTERS` WHERE `TEXT` LIKE '" 
 					+ String.valueOf(relatedChars.get(i))
 					+ "';";
-			Cursor cursor = myDatabase.rawQuery(query2, null);
+			cursor = myDatabase.rawQuery(query2, null);
 			// looping through all rows and adding to list
 			if (cursor.moveToFirst()) {
 				do {
@@ -218,8 +224,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 							.getColumnIndex("MEANING")), cursor.getString(cursor
 							.getColumnIndex("OTHER")));
 					characters.add(character);
+					
 				} while (cursor.moveToNext());
+				
 			}
+			cursor.close();
 		}
 		return characters;
 	}
