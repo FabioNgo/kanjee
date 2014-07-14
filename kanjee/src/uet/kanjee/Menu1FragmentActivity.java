@@ -1,8 +1,5 @@
 package uet.kanjee;
 
-import java.util.ArrayList;
-
-import android.graphics.drawable.ScaleDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -17,14 +14,12 @@ import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.SlidingDrawer;
 import android.widget.TextView;
-import android.support.v4.app.*;
-public class Menu1FragmentActivity extends FragmentActivity {
+public class Menu1FragmentActivity extends FragmentActivity implements OnClickListener {
 	public static FragmentActivity activity;
-	ArrayList<Fragment> fragments = new ArrayList<Fragment>();
-	ArrayList<Button> buttons = new ArrayList<Button>();
 	
 	Fragment menu1Fragment1;
 	Fragment detailCharacterFragment;
+	@SuppressWarnings("deprecation")
 	public static SlidingDrawer slidingDrawer;
 	public static Button slidingButton;
 	public static GridView slidingGV;
@@ -41,6 +36,7 @@ public class Menu1FragmentActivity extends FragmentActivity {
 		}
 		return instance;
 	}
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle arg0) {
 
@@ -55,36 +51,41 @@ public class Menu1FragmentActivity extends FragmentActivity {
 		FrameLayout frameLayout = (FrameLayout)findViewById(R.id.framelayout1);
 		frameLayout.getLayoutParams().height = (int) (MainActivity.screenHeight*0.92);
 		menu1Fragment1 = new RadicalsFragment();
-		getSupportFragmentManager().beginTransaction().replace(R.id.framelayout1, menu1Fragment1).commit();
+		getSupportFragmentManager().beginTransaction().replace(R.id.framelayout1, menu1Fragment1).addToBackStack(null).commit();
 		TextView back = (TextView)findViewById(R.id.bt_back);
 		back.getLayoutParams().height =  (int) (MainActivity.screenHeight*0.1);
-		back.setTextSize((float) (MainActivity.screenHeight*0.01));
+		back.setTextSize((float) (MainActivity.screenHeight*0.015));
 		back.setGravity(Gravity.CENTER);
-		back.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Menu1FragmentActivity.activity.finish();
-			}
-		});
+		back.setOnClickListener(this);
 		TextView reset = (TextView)findViewById(R.id.bt_reset);
 		reset.getLayoutParams().height =  (int) (MainActivity.screenHeight*0.1);
-		reset.setTextSize((float) (MainActivity.screenHeight*0.01));
+		reset.setTextSize((float) (MainActivity.screenHeight*0.015));
 		reset.setGravity(Gravity.CENTER);
-//		bt_back = (Button) findViewById(R.id.bt_back);
-//		bt_reset = (Button) findViewById(R.id.bt_reset);
-//		bt_back.setOnClickListener(this);
-		
+		reset.setOnClickListener(this);
 		slidingDrawer= (SlidingDrawer) findViewById(R.id.slidingDrawer1);
 		
 		slidingButton = (Button) findViewById(R.id.handle);
-		//slidingGV = (GridView)findViewById(R.id.gridView1);
 	}
 
 	@Override
 	public void onBackPressed() {
-		this.finish();
+		if(getSupportFragmentManager().findFragmentById(R.layout.detailcharacter_layout) != null){
+			getSupportFragmentManager().executePendingTransactions();
+		}
+	}
+	
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.bt_back:
+			onBackPressed();
+			
+			break;
+		case R.id.bt_reset:
+			break;
+		default:
+			break;
+		}
 	}
 	
 	

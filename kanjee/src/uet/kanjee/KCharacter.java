@@ -6,8 +6,16 @@ public class KCharacter {
 	private int id;
 	private int numStrokes;
 	private String text;
-	private String pinyin;
 	private String meaning;
+	
+	//bo cai nay	
+	private String pinyin;
+	
+	//can them nhung cai nay
+//	private String hanNhat;
+//	private String amNhat;
+//	private String trinhDo;
+//	private String duongDanImage;
 	private String other;
 
 	private ArrayList<KRadical> relatedRadicals;

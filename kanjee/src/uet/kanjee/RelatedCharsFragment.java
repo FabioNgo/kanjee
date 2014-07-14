@@ -45,7 +45,7 @@ public class RelatedCharsFragment extends Fragment implements OnClickListener{
 	                    int position, long id) {
 	            	DetailCharacterFragment f = new DetailCharacterFragment(chars.get(position));
 					getActivity().getSupportFragmentManager().beginTransaction()
-							.replace(R.id.framelayout1, f).commit();	
+							.replace(R.id.framelayout1, f).addToBackStack(null).commit();	
 	            }
 	        });
 		return view;
