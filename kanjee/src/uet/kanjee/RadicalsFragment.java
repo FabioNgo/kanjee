@@ -30,21 +30,23 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 	private ArrayList<KRadical> horzData;
 	ArrayList<KRadical> horzDataArranged;
 	ArrayList<Integer> posRadicalsSelected = new ArrayList<Integer>(); // vi tri
-																	// (int) cua
-																	// cac chu
-																	// dang dc
-																	// chon
+																		// (int)
+																		// cua
+																		// cac
+																		// chu
+																		// dang
+																		// dc
+																		// chon
 	ArrayList<ArrayList<KRadical>> arrayOfRelatedRadicals = new ArrayList<ArrayList<KRadical>>();
 	ArrayList<KRadical> relatedRadicals = new ArrayList<KRadical>();
-	
-	
+
 	SlidingDrawer slidingDrawer;
 	Button slidingButton;
 	LinearLayout slidingContent;
 	GridView slidingGV;
-	ArrayList<KCharacter> relatedCharacters= new ArrayList<KCharacter>();
+	ArrayList<KCharacter> relatedCharacters = new ArrayList<KCharacter>();
 	MyGridViewAdapter myGridViewAdapter;
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -54,20 +56,20 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 		}
 		
 		mContext = getActivity().getApplicationContext();
-		// Get handles to views that will be used
 		horzGridView = (TwoWayGridView) view.findViewById(R.id.horz_gridview);
 		slidingButton = Menu1FragmentActivity.slidingButton;
 		slidingDrawer = Menu1FragmentActivity.slidingDrawer;
-		//slidingGV = Menu1FragmentActivity.slidingGV;
-		
-//		myGridViewAdapter = new MyGridViewAdapter(mContext, R.layout.model_layout, relatedCharacters);
+//		slidingGV = Menu1FragmentActivity.slidingGV;
+//		myGridViewAdapter = new MyGridViewAdapter(mContext,
+//		R.layout.model_layout, relatedCharacters);
 //		slidingGV.setAdapter(myGridViewAdapter);
-		
+
 		horzGridView.setColumnWidth(MainActivity.screenHeight / 8);
 		horzData = (ArrayList<KRadical>) MainActivity.db.getAllRadicals();
 		horzDataArranged = reArrange(horzData);
 
-		horzGridViewAdapter = new HorzGridViewAdapter(mContext,R.layout.model_layout, horzDataArranged);
+		horzGridViewAdapter = new HorzGridViewAdapter(mContext,
+				R.layout.model_layout, horzDataArranged);
 
 		horzGridView.setAdapter(horzGridViewAdapter);
 
@@ -81,7 +83,7 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 				
 				 //
 				doOnClick(view, position);
-				
+
 				
 				
 				ArrayList<KRadical> selectedRadicals = new ArrayList<KRadical>();
@@ -127,13 +129,14 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 		}
 		return relatedRadicals;
 	}
+
 	public ArrayList<KCharacter> getRelatedChars(ArrayList<KRadical> radicals){
 		ArrayList<KCharacter> relatedChars = new ArrayList<KCharacter>();
 		for(KRadical radical : radicals){
 			ArrayList<KCharacter> chars = MainActivity.db.getCharContainingRadical(radical);
 			relatedChars.addAll(chars);
 		}
-		
+
 		return relatedChars;
 	}
 
@@ -143,15 +146,11 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 			if (!horzDataArranged.get(position).isOnSelect()) {
 				posRadicalsSelected.add((Integer) position);
 				horzDataArranged.get(position).setOnSelect(true);
-				horzGridViewAdapter.notifyDataSetChanged();
-				horzGridView.invalidateViews();
-				
+
 			} else {
 				posRadicalsSelected.remove((Integer) position);
 				horzDataArranged.get(position).setOnSelect(false);
-				horzGridViewAdapter.notifyDataSetChanged();
-				horzGridView.invalidateViews();
-				
+
 			}
 			if (posRadicalsSelected.isEmpty()) {
 				for (KRadical radical : horzDataArranged) {

@@ -10,7 +10,7 @@ public class KCharacter {
 	private String meaning;
 	private String other;
 
-	private ArrayList<KRadical> relatedRadicals; // cai nay phai la "cac radical tao thanh character nay" chu nhi?
+	private ArrayList<KRadical> relatedRadicals;
 	public KCharacter(){
 		setId(-1);
 		setNumStrokes(-1);

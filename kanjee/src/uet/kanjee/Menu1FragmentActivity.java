@@ -27,7 +27,7 @@ public class Menu1FragmentActivity extends FragmentActivity {
 	Fragment detailCharacterFragment;
 	public static SlidingDrawer slidingDrawer;
 	public static Button slidingButton;
-	//public static GridView slidingGV;
+	public static GridView slidingGV;
 	
 	ViewPager viewPager1;
 	Button bt_back;
