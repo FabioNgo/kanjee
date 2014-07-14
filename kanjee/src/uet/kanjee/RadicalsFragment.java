@@ -131,13 +131,27 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 	}
 
 	public ArrayList<KCharacter> getRelatedChars(ArrayList<KRadical> radicals){
-		ArrayList<KCharacter> relatedChars = new ArrayList<KCharacter>();
+		ArrayList<KCharacter> relatedChars1 = new ArrayList<KCharacter>();
+		ArrayList<KCharacter> relatedChars2	= new ArrayList<KCharacter>();
+		boolean isFirstRadical = true;
 		for(KRadical radical : radicals){
 			ArrayList<KCharacter> chars = MainActivity.db.getCharContainingRadical(radical);
-			relatedChars.addAll(chars);
+			if(isFirstRadical) {
+				relatedChars2.addAll(chars);
+				isFirstRadical = false;
+			}else {
+				for(KCharacter chararacter : relatedChars1) {
+					if(chars.contains(chararacter)) {
+						
+					}else {
+						relatedChars2.remove(chararacter);
+					}
+				}
+			}
+			relatedChars1 = (ArrayList<KCharacter>) relatedChars2.clone();
 		}
 
-		return relatedChars;
+		return relatedChars2;
 	}
 
 	public void doOnClick(View view, int position) {
@@ -194,26 +208,26 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 	
 	
 	//ham in ra atribute cua cac radical
-	void abc(ArrayList<KRadical> c) {
-		String b = "";
-		for (int i = 0; i < c.size(); i++) {
-			b += c.get(i).getText() + " ";
-		}
-		Log.e("", b);
-		String a = "";
-		for (int i = 0; i < 20; i++) {
-			if (!(horzDataArranged.get(i).isFilled() || horzDataArranged.get(i)
-					.isHeader())) {
-				a += horzDataArranged.get(i).getText();
-				if (horzDataArranged.get(i).isOnFocus())
-					a += "[F]";
-				if (horzDataArranged.get(i).isOnSelect())
-					a += "[S]";
-				a += " ";
-			}
-		}
-		Log.e("", a);
-	}
+//	void abc(ArrayList<KRadical> c) {
+//		String b = "";
+//		for (int i = 0; i < c.size(); i++) {
+//			b += c.get(i).getText() + " ";
+//		}
+//		Log.e("", b);
+//		String a = "";
+//		for (int i = 0; i < 20; i++) {
+//			if (!(horzDataArranged.get(i).isFilled() || horzDataArranged.get(i)
+//					.isHeader())) {
+//				a += horzDataArranged.get(i).getText();
+//				if (horzDataArranged.get(i).isOnFocus())
+//					a += "[F]";
+//				if (horzDataArranged.get(i).isOnSelect())
+//					a += "[S]";
+//				a += " ";
+//			}
+//		}
+//		Log.e("", a);
+//	}
 
 	private ArrayList<KRadical> reArrange(ArrayList<KRadical> horzData) {
 		// TODO Auto-generated method stub
