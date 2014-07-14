@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.SlidingDrawer;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jess.ui.TwoWayAdapterView;
@@ -51,6 +52,7 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 			view = inflater.inflate(R.layout.radicals_fragment, container,
 					false);
 		}
+		
 		mContext = getActivity().getApplicationContext();
 		// Get handles to views that will be used
 		horzGridView = (TwoWayGridView) view.findViewById(R.id.horz_gridview);
@@ -76,19 +78,21 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 					int position, long id) {
 				Toast.makeText(mContext, "clicked " + position,
 						Toast.LENGTH_SHORT).show();
+				
+				 //
 				doOnClick(view, position);
 				
 				
 				
 				ArrayList<KRadical> selectedRadicals = new ArrayList<KRadical>();
-				for(int i=0;i<posRadicalsSelected.size();i++){
-					selectedRadicals.add(horzDataArranged.get(posRadicalsSelected.get(i)));
+				for(Integer pos : posRadicalsSelected){
+					selectedRadicals.add(horzDataArranged.get(pos));
 				}
 				relatedCharacters = getRelatedChars(selectedRadicals);
 				//relatedCharacters.add(new KCharacter());
-				for(int i=0;i<relatedCharacters.size();i++){
-					Log.e("",relatedCharacters.get(i).getText()+ " ");
-				}
+//				for(int i=0;i<relatedCharacters.size();i++){
+//					Log.e("",relatedCharacters.get(i).getText()+ " ");
+//				}
 				slidingButton.setText(relatedCharacters.size()+" characters found");
 				RelatedCharsFragment f = new RelatedCharsFragment(relatedCharacters);
 				getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, f).commit();
@@ -125,8 +129,8 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 	}
 	public ArrayList<KCharacter> getRelatedChars(ArrayList<KRadical> radicals){
 		ArrayList<KCharacter> relatedChars = new ArrayList<KCharacter>();
-		for(int i=0;i<radicals.size();i++){
-			ArrayList<KCharacter> chars = MainActivity.db.getCharContainingRadical(radicals.get(i));
+		for(KRadical radical : radicals){
+			ArrayList<KCharacter> chars = MainActivity.db.getCharContainingRadical(radical);
 			relatedChars.addAll(chars);
 		}
 		
@@ -139,53 +143,53 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 			if (!horzDataArranged.get(position).isOnSelect()) {
 				posRadicalsSelected.add((Integer) position);
 				horzDataArranged.get(position).setOnSelect(true);
+				horzGridViewAdapter.notifyDataSetChanged();
+				horzGridView.invalidateViews();
 				
 			} else {
 				posRadicalsSelected.remove((Integer) position);
 				horzDataArranged.get(position).setOnSelect(false);
+				horzGridViewAdapter.notifyDataSetChanged();
+				horzGridView.invalidateViews();
 				
 			}
 			if (posRadicalsSelected.isEmpty()) {
-				for (int i = 0; i < horzDataArranged.size(); i++) {
-					horzDataArranged.get(i).setOnFocus(true);
-					horzDataArranged.get(i).setOnSelect(false);
+				for (KRadical radical : horzDataArranged) {
+					radical.setOnFocus(true);
+					radical.setOnSelect(false);
 				}
+				horzGridViewAdapter.notifyDataSetChanged();
+				horzGridView.invalidateViews();
 			} else {
 				arrayOfRelatedRadicals.clear();
-				for(int i=0;i<posRadicalsSelected.size();i++){
-					relatedRadicals = getRelatedRadical(horzDataArranged.get(posRadicalsSelected.get(i)));
+				for(Integer pos : posRadicalsSelected) {
+				
+					relatedRadicals = getRelatedRadical(horzDataArranged.get(pos));
 					arrayOfRelatedRadicals.add(relatedRadicals);
-//					String a="   ";
-//						for(int j=0;j<relatedRadicals.size();j++){
-//							a += relatedRadicals.get(j).getText()+" ";
-//						}
-//						Log.e(posRadicalsSelected.size()+"",a);
+//					
 				}
-//				String a="";
-//				for(int i=0;i<arrayOfRelatedRadicals.size();i++){
-//					for(int j=0;j<arrayOfRelatedRadicals.get(i).size();j++){
-//						a += arrayOfRelatedRadicals.get(i).get(j).getText()+" ";
-//					}
-//					Log.e("",a);
-//				}
-//				Log.e("",radicalsSelected.size()+ " "+arrayOfRelatedRadicals.size());
-				for (int i = 0; i < horzDataArranged.size(); i++) {
+//				
+				for (KRadical radical : horzDataArranged) {
 					for(int j=0;j<posRadicalsSelected.size();j++){
-						if(!(arrayOfRelatedRadicals.get(j).contains(horzDataArranged.get(i)))){
-							horzDataArranged.get(i).setOnFocus(false);
+						if(!(arrayOfRelatedRadicals.get(j).contains(radical))){
+							radical.setOnFocus(false);
 						}else{
-							horzDataArranged.get(i).setOnFocus(true);
-							Log.e("",horzDataArranged.get(i).getText());
+							radical.setOnFocus(true);
+							//Log.e("",horzDataArranged.get(i).getText());
 						}
 					}
+					horzGridViewAdapter.notifyDataSetChanged();
 				}
 			}
-			for(int i=0;i<posRadicalsSelected.size();i++){
-				horzDataArranged.get(posRadicalsSelected.get(i)).setOnFocus(true);
+			for(Integer pos : posRadicalsSelected){
+				horzDataArranged.get(pos).setOnFocus(true);
 			}
+			horzGridViewAdapter.notifyDataSetChanged();
+			horzGridView.invalidateViews();
 //			abc(relatedRadicals);
 		}
 		horzGridViewAdapter.notifyDataSetChanged();
+		horzGridView.invalidateViews();
 	}
 
 	

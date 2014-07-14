@@ -17,20 +17,26 @@
         android:background="#00BFFF"
         android:padding="0dp" >
 
-        <Button
+        <TextView
             android:id="@+id/bt_back"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:padding="10dp"
             android:text="Back" />
 
-        <Button
+        <TextView
             android:id="@+id/bt_reset"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:padding="10dp"
             android:text="Reset" />
     </RelativeLayout>
 

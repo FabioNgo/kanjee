@@ -2,10 +2,12 @@ package uet.kanjee;
 
 import java.util.ArrayList;
 
+import android.graphics.drawable.ScaleDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -14,10 +16,10 @@ import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.SlidingDrawer;
+import android.widget.TextView;
 import android.support.v4.app.*;
-public class Menu1FragmentActivity extends FragmentActivity implements
-		OnClickListener {
-
+public class Menu1FragmentActivity extends FragmentActivity {
+	public static FragmentActivity activity;
 	ArrayList<Fragment> fragments = new ArrayList<Fragment>();
 	ArrayList<Button> buttons = new ArrayList<Button>();
 	
@@ -32,6 +34,7 @@ public class Menu1FragmentActivity extends FragmentActivity implements
 	Button bt_reset;
 
 	private static Menu1FragmentActivity instance;
+	public static int numCol = 6;
 	public static Menu1FragmentActivity getInstance(){
 		if (instance == null) {
 			instance = new Menu1FragmentActivity();
@@ -45,7 +48,7 @@ public class Menu1FragmentActivity extends FragmentActivity implements
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		// this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 		// WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		
+		activity = this;
 		setContentView(R.layout.menu1_fragmentactivity);
 		RelativeLayout relativeLayout2 = (RelativeLayout)findViewById(R.id.RelativeLayout2);
 		relativeLayout2.getLayoutParams().height = (int) (MainActivity.screenHeight*0.08);
@@ -53,10 +56,25 @@ public class Menu1FragmentActivity extends FragmentActivity implements
 		frameLayout.getLayoutParams().height = (int) (MainActivity.screenHeight*0.92);
 		menu1Fragment1 = new RadicalsFragment();
 		getSupportFragmentManager().beginTransaction().replace(R.id.framelayout1, menu1Fragment1).commit();
-		
-		bt_back = (Button) findViewById(R.id.bt_back);
-		bt_reset = (Button) findViewById(R.id.bt_reset);
-		bt_back.setOnClickListener(this);
+		TextView back = (TextView)findViewById(R.id.bt_back);
+		back.getLayoutParams().height =  (int) (MainActivity.screenHeight*0.1);
+		back.setTextSize((float) (MainActivity.screenHeight*0.01));
+		back.setGravity(Gravity.CENTER);
+		back.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Menu1FragmentActivity.activity.finish();
+			}
+		});
+		TextView reset = (TextView)findViewById(R.id.bt_reset);
+		reset.getLayoutParams().height =  (int) (MainActivity.screenHeight*0.1);
+		reset.setTextSize((float) (MainActivity.screenHeight*0.01));
+		reset.setGravity(Gravity.CENTER);
+//		bt_back = (Button) findViewById(R.id.bt_back);
+//		bt_reset = (Button) findViewById(R.id.bt_reset);
+//		bt_back.setOnClickListener(this);
 		
 		slidingDrawer= (SlidingDrawer) findViewById(R.id.slidingDrawer1);
 		
@@ -69,15 +87,6 @@ public class Menu1FragmentActivity extends FragmentActivity implements
 		this.finish();
 	}
 	
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.bt_back:
-			this.finish();
-			break;
-		default:
-			break;
-		}
-	}
+	
 
 }

@@ -35,7 +35,7 @@ public class RelatedCharsFragment extends Fragment {
 					false);
 		}
 		GridView gridView = (GridView)view.findViewById(R.id.charsGridView);
-		//gridView.setNumColumns(6);
+		gridView.setNumColumns(Menu1FragmentActivity.numCol);
 		//gridView.
 		MyGridViewAdapter adapter = new MyGridViewAdapter(getActivity(), R.layout.model_layout, chars);
 		gridView.setAdapter(adapter);

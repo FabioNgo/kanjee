@@ -30,7 +30,7 @@ import android.os.Build;
  * @author Huy
  *
  */
-public class MainActivity extends Activity implements OnClickListener{
+public class MainActivity extends Activity {
 	public static DatabaseHelper db;
 	ImageView im1;
 	static final String DB_NAME = "kanjee.sqlt";
@@ -42,12 +42,22 @@ public class MainActivity extends Activity implements OnClickListener{
 		super.onCreate(savedInstanceState);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
-		im1 = (ImageView) findViewById(R.id.imageView1);
-		im1.setOnClickListener(this);
+		TextView appName = (TextView)findViewById(R.id.app_name);
+		TextView function1 = (TextView)findViewById(R.id.function1);
+		function1.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent(getApplicationContext(), Menu1FragmentActivity.class);
+				startActivity(i); 
+			}
+		});
 		DisplayMetrics displayMetrics = new DisplayMetrics();
         this.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         screenHeight = displayMetrics.heightPixels;
         screenWidth = displayMetrics.widthPixels;
+        appName.setTextSize((float) (screenHeight/50.0));
         font = Typeface.createFromAsset(getAssets(), "font.OTF");
 	
 		copyAssets();
@@ -146,17 +156,6 @@ public class MainActivity extends Activity implements OnClickListener{
 
 	}
 	
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.imageView1:
-			Intent i = new Intent(this, Menu1FragmentActivity.class);
-			startActivity(i); 
-			break;
-
-		default:
-			break;
-		}
-	}
+	
 
 }

@@ -22,7 +22,7 @@ public class MyGridViewAdapter extends ArrayAdapter<KCharacter>{
 		// TODO Auto-generated constructor stub
 		this.mContext = context;
 		this.data = objects;
-		size =(int)(MainActivity.screenHeight*0.92)/8;
+		size =(int)(MainActivity.screenWidth)/Menu1FragmentActivity.numCol;
 	}
 	
 	@Override
@@ -36,7 +36,7 @@ public class MyGridViewAdapter extends ArrayAdapter<KCharacter>{
 			convertView = inflater.inflate(R.layout.model_layout , parent, false);
 			handler = new ViewHandler();
 			handler.rl = (RelativeLayout) convertView.findViewById(R.id.layout);
-			handler.rl.getLayoutParams().height = MainActivity.screenWidth/5;
+			handler.rl.getLayoutParams().height = MainActivity.screenWidth/Menu1FragmentActivity.numCol;
 			handler.tv = (TextView) convertView.findViewById(R.id.content);
 			//handler.tv.setTextSize(MainActivity.screenWidth/30);
 			
