@@ -150,7 +150,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 							);
 					 //adding to tags list
 					radicals.add(radical);
-					Log.d("Related Radical: "+character.getText(), radicals.get(radicals.size()-1).getText());
+					//Log.d("Related Radical: "+character.getText(), radicals.get(radicals.size()-1).getText());
 				} while (cursor.moveToNext());
 				cursor.close();
 			}
