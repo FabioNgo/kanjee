@@ -1,7 +1,6 @@
 package uet.kanjee;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -29,21 +28,23 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 	private ArrayList<KRadical> horzData;
 	ArrayList<KRadical> horzDataArranged;
 	ArrayList<Integer> posRadicalsSelected = new ArrayList<Integer>(); // vi tri
-																	// (int) cua
-																	// cac chu
-																	// dang dc
-																	// chon
+																		// (int)
+																		// cua
+																		// cac
+																		// chu
+																		// dang
+																		// dc
+																		// chon
 	ArrayList<ArrayList<KRadical>> arrayOfRelatedRadicals = new ArrayList<ArrayList<KRadical>>();
 	ArrayList<KRadical> relatedRadicals = new ArrayList<KRadical>();
-	
-	
+
 	SlidingDrawer slidingDrawer;
 	Button slidingButton;
 	LinearLayout slidingContent;
 	GridView slidingGV;
-	ArrayList<KCharacter> relatedCharacters= new ArrayList<KCharacter>();
+	ArrayList<KCharacter> relatedCharacters = new ArrayList<KCharacter>();
 	MyGridViewAdapter myGridViewAdapter;
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -52,20 +53,20 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 					false);
 		}
 		mContext = getActivity().getApplicationContext();
-		// Get handles to views that will be used
 		horzGridView = (TwoWayGridView) view.findViewById(R.id.horz_gridview);
 		slidingButton = Menu1FragmentActivity.slidingButton;
 		slidingDrawer = Menu1FragmentActivity.slidingDrawer;
-		//slidingGV = Menu1FragmentActivity.slidingGV;
-		
-//		myGridViewAdapter = new MyGridViewAdapter(mContext, R.layout.model_layout, relatedCharacters);
+//		slidingGV = Menu1FragmentActivity.slidingGV;
+//		myGridViewAdapter = new MyGridViewAdapter(mContext,
+//		R.layout.model_layout, relatedCharacters);
 //		slidingGV.setAdapter(myGridViewAdapter);
-		
+
 		horzGridView.setColumnWidth(MainActivity.screenHeight / 8);
 		horzData = (ArrayList<KRadical>) MainActivity.db.getAllRadicals();
 		horzDataArranged = reArrange(horzData);
 
-		horzGridViewAdapter = new HorzGridViewAdapter(mContext,R.layout.model_layout, horzDataArranged);
+		horzGridViewAdapter = new HorzGridViewAdapter(mContext,
+				R.layout.model_layout, horzDataArranged);
 
 		horzGridView.setAdapter(horzGridViewAdapter);
 
@@ -77,32 +78,23 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 				Toast.makeText(mContext, "clicked " + position,
 						Toast.LENGTH_SHORT).show();
 				doOnClick(view, position);
-				
-				
-				
+
 				ArrayList<KRadical> selectedRadicals = new ArrayList<KRadical>();
-				for(int i=0;i<posRadicalsSelected.size();i++){
-					selectedRadicals.add(horzDataArranged.get(posRadicalsSelected.get(i)));
+				for (int i = 0; i < posRadicalsSelected.size(); i++) {
+					selectedRadicals.add(horzDataArranged
+							.get(posRadicalsSelected.get(i)));
 				}
 				relatedCharacters = getRelatedChars(selectedRadicals);
-				//relatedCharacters.add(new KCharacter());
-				for(int i=0;i<relatedCharacters.size();i++){
-					Log.e("",relatedCharacters.get(i).getText()+ " ");
-				}
-				slidingButton.setText(relatedCharacters.size()+" characters found");
-				RelatedCharsFragment f = new RelatedCharsFragment(relatedCharacters);
-				getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, f).commit();
-//				String a="";
-//				for(int i=0;i<posRadicalsSelected.size();i++){
-//					a += horzDataArranged.get(posRadicalsSelected.get(i)).getText() + " ";
-//				}
-//				Log.e("",a);
-//				for(int i=0;i<relatedCharacters.size();i++){
-//					Log.e("",relatedCharacters.get(i).getText());
-//				}
-				
+				slidingButton.setText(relatedCharacters.size()
+						+ " characters found");
+				RelatedCharsFragment f = new RelatedCharsFragment(
+						relatedCharacters);
+				getActivity().getSupportFragmentManager().beginTransaction()
+						.replace(R.id.container, f).commit();
+
 			}
 		});
+		
 		return view;
 	}
 
@@ -123,13 +115,15 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 		}
 		return relatedRadicals;
 	}
-	public ArrayList<KCharacter> getRelatedChars(ArrayList<KRadical> radicals){
+
+	public ArrayList<KCharacter> getRelatedChars(ArrayList<KRadical> radicals) {
 		ArrayList<KCharacter> relatedChars = new ArrayList<KCharacter>();
-		for(int i=0;i<radicals.size();i++){
-			ArrayList<KCharacter> chars = MainActivity.db.getCharContainingRadical(radicals.get(i));
+		for (int i = 0; i < radicals.size(); i++) {
+			ArrayList<KCharacter> chars = MainActivity.db
+					.getCharContainingRadical(radicals.get(i));
 			relatedChars.addAll(chars);
 		}
-		
+
 		return relatedChars;
 	}
 
@@ -139,11 +133,11 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 			if (!horzDataArranged.get(position).isOnSelect()) {
 				posRadicalsSelected.add((Integer) position);
 				horzDataArranged.get(position).setOnSelect(true);
-				
+
 			} else {
 				posRadicalsSelected.remove((Integer) position);
 				horzDataArranged.get(position).setOnSelect(false);
-				
+
 			}
 			if (posRadicalsSelected.isEmpty()) {
 				for (int i = 0; i < horzDataArranged.size(); i++) {
@@ -152,64 +146,29 @@ public class RadicalsFragment extends Fragment implements OnClickListener {
 				}
 			} else {
 				arrayOfRelatedRadicals.clear();
-				for(int i=0;i<posRadicalsSelected.size();i++){
-					relatedRadicals = getRelatedRadical(horzDataArranged.get(posRadicalsSelected.get(i)));
+				for (int i = 0; i < posRadicalsSelected.size(); i++) {
+					relatedRadicals = getRelatedRadical(horzDataArranged
+							.get(posRadicalsSelected.get(i)));
 					arrayOfRelatedRadicals.add(relatedRadicals);
-//					String a="   ";
-//						for(int j=0;j<relatedRadicals.size();j++){
-//							a += relatedRadicals.get(j).getText()+" ";
-//						}
-//						Log.e(posRadicalsSelected.size()+"",a);
 				}
-//				String a="";
-//				for(int i=0;i<arrayOfRelatedRadicals.size();i++){
-//					for(int j=0;j<arrayOfRelatedRadicals.get(i).size();j++){
-//						a += arrayOfRelatedRadicals.get(i).get(j).getText()+" ";
-//					}
-//					Log.e("",a);
-//				}
-//				Log.e("",radicalsSelected.size()+ " "+arrayOfRelatedRadicals.size());
 				for (int i = 0; i < horzDataArranged.size(); i++) {
-					for(int j=0;j<posRadicalsSelected.size();j++){
-						if(!(arrayOfRelatedRadicals.get(j).contains(horzDataArranged.get(i)))){
+					for (int j = 0; j < posRadicalsSelected.size(); j++) {
+						if (!(arrayOfRelatedRadicals.get(j)
+								.contains(horzDataArranged.get(i)))) {
 							horzDataArranged.get(i).setOnFocus(false);
-						}else{
+						} else {
 							horzDataArranged.get(i).setOnFocus(true);
-							Log.e("",horzDataArranged.get(i).getText());
+							Log.e("", horzDataArranged.get(i).getText());
 						}
 					}
 				}
 			}
-			for(int i=0;i<posRadicalsSelected.size();i++){
-				horzDataArranged.get(posRadicalsSelected.get(i)).setOnFocus(true);
+			for (int i = 0; i < posRadicalsSelected.size(); i++) {
+				horzDataArranged.get(posRadicalsSelected.get(i)).setOnFocus(
+						true);
 			}
-//			abc(relatedRadicals);
 		}
 		horzGridViewAdapter.notifyDataSetChanged();
-	}
-
-	
-	
-	//ham in ra atribute cua cac radical
-	void abc(ArrayList<KRadical> c) {
-		String b = "";
-		for (int i = 0; i < c.size(); i++) {
-			b += c.get(i).getText() + " ";
-		}
-		Log.e("", b);
-		String a = "";
-		for (int i = 0; i < 20; i++) {
-			if (!(horzDataArranged.get(i).isFilled() || horzDataArranged.get(i)
-					.isHeader())) {
-				a += horzDataArranged.get(i).getText();
-				if (horzDataArranged.get(i).isOnFocus())
-					a += "[F]";
-				if (horzDataArranged.get(i).isOnSelect())
-					a += "[S]";
-				a += " ";
-			}
-		}
-		Log.e("", a);
 	}
 
 	private ArrayList<KRadical> reArrange(ArrayList<KRadical> horzData) {
