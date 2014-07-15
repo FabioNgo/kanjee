@@ -18,6 +18,7 @@ public class DetailCharacterFragment extends Fragment{
 	private TextView trinhDoTV;
 	private ImageView cachVietIV;
 	
+	
 	public DetailCharacterFragment(){
 		
 	}
@@ -28,7 +29,8 @@ public class DetailCharacterFragment extends Fragment{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.detailcharacter_layout, container,false);
+		View v = inflater.inflate(R.layout.detailcharacter_layout, null,false);
+		Menu1FragmentActivity.STATE=3;
 		characterTV = (TextView) v.findViewById(R.id.characterTV);
 		meaningTV =  (TextView) v.findViewById(R.id.meaningTV);
 		
@@ -39,5 +41,12 @@ public class DetailCharacterFragment extends Fragment{
 		
 		
 		return v;
+	}
+	
+	@Override
+	public void onDestroy() {
+		Menu1FragmentActivity.slidingDrawer.setVisibility(View.VISIBLE);
+		Menu1FragmentActivity.STATE=2;
+		super.onDestroy();
 	}
 }

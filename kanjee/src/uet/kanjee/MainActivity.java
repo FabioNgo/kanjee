@@ -26,7 +26,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.os.Build;
 /**
- * Thay doi code o day
  * @author Huy
  *
  */
