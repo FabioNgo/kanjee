@@ -12,12 +12,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.SlidingDrawer;
 
 
 
 @SuppressLint("ValidFragment")
 public class RelatedCharsFragment extends Fragment implements OnClickListener{
 	ArrayList<KCharacter> chars;
+	SlidingDrawer slidingGV;
 	public RelatedCharsFragment(){
 		super();
 		chars = new ArrayList<KCharacter>();
@@ -25,12 +27,13 @@ public class RelatedCharsFragment extends Fragment implements OnClickListener{
 	public RelatedCharsFragment(ArrayList<KCharacter> chars){
 		super();
 		this.chars = chars;
+		slidingGV=Menu1FragmentActivity.slidingDrawer;
 	}
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = null;
 		if (view == null) {
-			view = inflater.inflate(R.layout.sliding, container,
+			view = inflater.inflate(R.layout.sliding, null,
 					false);
 		}
 		GridView gridView = (GridView)view.findViewById(R.id.charsGridView);
@@ -44,8 +47,11 @@ public class RelatedCharsFragment extends Fragment implements OnClickListener{
 	            public void onItemClick(AdapterView<?> parent, View v,
 	                    int position, long id) {
 	            	DetailCharacterFragment f = new DetailCharacterFragment(chars.get(position));
+	            	
 					getActivity().getSupportFragmentManager().beginTransaction()
-							.replace(R.id.framelayout1, f).addToBackStack(null).commit();	
+							.replace(R.id.framelayout1, f).addToBackStack(null).commit();
+					slidingGV.close();
+					slidingGV.setVisibility(View.GONE);
 	            }
 	        });
 		return view;

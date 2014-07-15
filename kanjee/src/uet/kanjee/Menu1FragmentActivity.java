@@ -1,9 +1,12 @@
 package uet.kanjee;
 
+import java.util.List;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,9 +19,8 @@ import android.widget.SlidingDrawer;
 import android.widget.TextView;
 public class Menu1FragmentActivity extends FragmentActivity implements OnClickListener {
 	public static FragmentActivity activity;
-	
-	Fragment menu1Fragment1;
-	Fragment detailCharacterFragment;
+	public static int STATE;
+	RadicalsFragment radicalFragment;
 	@SuppressWarnings("deprecation")
 	public static SlidingDrawer slidingDrawer;
 	public static Button slidingButton;
@@ -45,13 +47,18 @@ public class Menu1FragmentActivity extends FragmentActivity implements OnClickLi
 		// this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 		// WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		activity = this;
+		
+		
 		setContentView(R.layout.menu1_fragmentactivity);
 		RelativeLayout relativeLayout2 = (RelativeLayout)findViewById(R.id.RelativeLayout2);
 		relativeLayout2.getLayoutParams().height = (int) (MainActivity.screenHeight*0.08);
 		FrameLayout frameLayout = (FrameLayout)findViewById(R.id.framelayout1);
 		frameLayout.getLayoutParams().height = (int) (MainActivity.screenHeight*0.92);
-		menu1Fragment1 = new RadicalsFragment();
-		getSupportFragmentManager().beginTransaction().replace(R.id.framelayout1, menu1Fragment1).addToBackStack(null).commit();
+		radicalFragment = new RadicalsFragment();
+		getSupportFragmentManager().beginTransaction().replace(R.id.framelayout1, radicalFragment).addToBackStack(null).commit();
+		
+		
+		
 		TextView back = (TextView)findViewById(R.id.bt_back);
 		back.getLayoutParams().height =  (int) (MainActivity.screenHeight*0.1);
 		back.setTextSize((float) (MainActivity.screenHeight*0.015));
@@ -67,21 +74,37 @@ public class Menu1FragmentActivity extends FragmentActivity implements OnClickLi
 		slidingButton = (Button) findViewById(R.id.handle);
 	}
 
+	public Fragment getVisibleFragment(){
+		List<Fragment> fragments = getSupportFragmentManager().getFragments();
+		for(Fragment fragment:fragments){
+			if(fragment!=null && fragment.isVisible()){
+				return fragment;
+			}
+		}
+		return null;
+	}
 	@Override
 	public void onBackPressed() {
-		if(getSupportFragmentManager().findFragmentById(R.layout.detailcharacter_layout) != null){
-			getSupportFragmentManager().executePendingTransactions();
+		Log.e("",""+Menu1FragmentActivity.STATE);
+		if(Menu1FragmentActivity.STATE==3){
+			getSupportFragmentManager().beginTransaction().replace(R.id.framelayout1, new RadicalsFragment()).commit();
+		}else if(Menu1FragmentActivity.STATE==2){
+			this.finish();
 		}
 	}
-	
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.bt_back:
 			onBackPressed();
-			
 			break;
 		case R.id.bt_reset:
+			radicalFragment.posRadicalsSelected.clear();
+			for (KRadical radical : radicalFragment.horzDataArranged) {
+				radical.setOnFocus(true);
+				radical.setOnSelect(false);
+			}
+			radicalFragment.horzGridViewAdapter.notifyDataSetChanged();
 			break;
 		default:
 			break;
