@@ -67,13 +67,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		if (c.moveToFirst()) {
 			int a = 0;
 			do {
-				KCharacter character = new KCharacter(c.getInt(c
-						.getColumnIndex("ID")), c.getInt(c
-						.getColumnIndex("NUMSTROKES")), c.getString(c
-						.getColumnIndex("TEXT")), c.getString(c
-						.getColumnIndex("PINYIN")), c.getString(c
-						.getColumnIndex("MEANING")), c.getString(c
-						.getColumnIndex("OTHER")));
+				KCharacter character = new KCharacter(
+						c.getInt(c.getColumnIndex("ID")),
+						c.getInt(c.getColumnIndex("NUMSTROKES")),
+						c.getString(c.getColumnIndex("TEXT")),
+						c.getString(c.getColumnIndex("PINYIN")),
+						c.getString(c.getColumnIndex("MEANING")),
+						c.getString(c.getColumnIndex("OTHER")),
+						c.getString(c.getColumnIndex("AMNHAT")),
+						c.getString(c.getColumnIndex("HANNHAT")));
 				// adding to tags list
 				chars.add(character);
 				//Log.d("character", chars.get(chars.size()-1).getText());
@@ -216,13 +218,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			// looping through all rows and adding to list
 			if (cursor.moveToFirst()) {
 				do {
-					KCharacter character = new KCharacter(cursor.getInt(cursor
-							.getColumnIndex("ID")), cursor.getInt(cursor
-							.getColumnIndex("NUMSTROKES")), cursor.getString(cursor
-							.getColumnIndex("TEXT")), cursor.getString(cursor
-							.getColumnIndex("PINYIN")), cursor.getString(cursor
-							.getColumnIndex("MEANING")), cursor.getString(cursor
-							.getColumnIndex("OTHER")));
+					KCharacter character = new KCharacter(
+							cursor.getInt(cursor.getColumnIndex("ID")),
+							cursor.getInt(cursor.getColumnIndex("NUMSTROKES")),
+							cursor.getString(cursor.getColumnIndex("TEXT")),
+							cursor.getString(cursor.getColumnIndex("PINYIN")),
+							cursor.getString(cursor.getColumnIndex("MEANING")),
+							cursor.getString(cursor.getColumnIndex("OTHER")),
+							cursor.getString(cursor.getColumnIndex("AMNHAT")),
+							cursor.getString(cursor.getColumnIndex("HANNHAT")));
+							
 					characters.add(character);
 					
 				} while (cursor.moveToNext());

@@ -9,7 +9,8 @@ public class KCharacter {
 	private String pinyin;
 	private String meaning;
 	private String other;
-
+	private String amNhat;
+	private String hanNhat;
 	private ArrayList<KRadical> relatedRadicals;
 	public KCharacter(){
 		setId(-1);
@@ -19,17 +20,21 @@ public class KCharacter {
 		setMeaning("");
 		setOther("");
 		setRelatedRadicals(new ArrayList<KRadical>());
+		setAmNhat("");
+		setHanNhat("");
 	}
 	public KCharacter(String text){
 		setText(text);
 	}
-	public KCharacter(int id, int numStrokes, String text, String pinyin, String meaning, String other){
+	public KCharacter(int id, int numStrokes, String text, String pinyin, String meaning, String other, String amNhat, String hanNhat){
 		this.setId(id);
 		this.setNumStrokes(numStrokes);
 		this.setText(text);
 		this.setPinyin(pinyin);
 		this.setMeaning(meaning);
 		this.setOther(other);
+		this.setAmNhat(amNhat);
+		this.setHanNhat(hanNhat);
 	}
 	/**
 	 * @return the id
@@ -121,5 +126,17 @@ public class KCharacter {
 			return false;
 		return this.getText().equals(((KCharacter) other).getText());
 
+	}
+	public String getAmNhat() {
+		return amNhat;
+	}
+	public void setAmNhat(String amNhat) {
+		this.amNhat = amNhat;
+	}
+	public String getHanNhat() {
+		return hanNhat;
+	}
+	public void setHanNhat(String hanNhat) {
+		this.hanNhat = hanNhat;
 	}
 }
