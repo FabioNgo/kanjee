@@ -1,15 +1,8 @@
 package uet.kanjee;
 
-import java.util.ArrayList;
-
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 
 public class KRadical {
 	private String id;
-	private int color;
 	private boolean onFocus;
 	private boolean onSelect;
 	private int numStrokes;
@@ -28,7 +21,6 @@ public class KRadical {
 
 	public KRadical(String id, int color) {
 		this.id = id;
-		this.color = color;
 		onSelect = false;
 		onFocus = true;
 

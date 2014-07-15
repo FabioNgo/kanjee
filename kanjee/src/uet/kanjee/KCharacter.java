@@ -7,15 +7,8 @@ public class KCharacter {
 	private int numStrokes;
 	private String text;
 	private String meaning;
-	
-	//bo cai nay	
 	private String pinyin;
-	
-	//can them nhung cai nay
-//	private String hanNhat;
-//	private String amNhat;
-//	private String trinhDo;
-//	private String duongDanImage;
+	private String trinhDo;
 	private String other;
 	private String amNhat;
 	private String hanNhat;

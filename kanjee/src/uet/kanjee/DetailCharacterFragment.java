@@ -1,7 +1,9 @@
 package uet.kanjee;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,12 +35,15 @@ public class DetailCharacterFragment extends Fragment{
 		Menu1FragmentActivity.STATE=3;
 		characterTV = (TextView) v.findViewById(R.id.characterTV);
 		meaningTV =  (TextView) v.findViewById(R.id.meaningTV);
-		
-		
+		amNhatTV = (TextView)v.findViewById(R.id.amNhatTV);
+		hanNhatTV = (TextView)v.findViewById(R.id.hanNhatTV);
 		
 		characterTV.setText(thischar.getText());
 		meaningTV.setText(thischar.getMeaning());
-		
+		amNhatTV.setTypeface(MainActivity.font,Typeface.BOLD);
+		amNhatTV.setText(thischar.getAmNhat());
+		hanNhatTV.setTypeface(MainActivity.font,Typeface.BOLD);
+		hanNhatTV.setText(thischar.getHanNhat());
 		
 		return v;
 	}

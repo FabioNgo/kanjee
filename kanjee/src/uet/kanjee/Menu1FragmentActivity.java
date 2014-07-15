@@ -44,8 +44,6 @@ public class Menu1FragmentActivity extends FragmentActivity implements OnClickLi
 
 		super.onCreate(arg0);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		// this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-		// WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		activity = this;
 		
 		
@@ -85,7 +83,6 @@ public class Menu1FragmentActivity extends FragmentActivity implements OnClickLi
 	}
 	@Override
 	public void onBackPressed() {
-		Log.e("",""+Menu1FragmentActivity.STATE);
 		if(Menu1FragmentActivity.STATE==3){
 			getSupportFragmentManager().beginTransaction().replace(R.id.framelayout1, new RadicalsFragment()).commit();
 		}else if(Menu1FragmentActivity.STATE==2){

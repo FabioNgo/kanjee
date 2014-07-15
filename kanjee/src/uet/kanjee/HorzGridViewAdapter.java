@@ -28,7 +28,6 @@ public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 	
 	public HorzGridViewAdapter(Context context, int resource, ArrayList<KRadical> objects) {
 		super(context, resource, objects);
-		// TODO Auto-generated constructor stub
 		this.mContext = context;
 		this.data = objects;
 
@@ -37,15 +36,12 @@ public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 		size =(int)(MainActivity.screenHeight*0.92)/rows;
 		RadicalsFragment.horzGridView.setNumRows(rows);
 		
-//		RadicalsFragment.horzGridView.setRowHeight(size);
-//		RadicalsFragment.horzGridView
 	}
 
 
 	private Context mContext;
 	private ArrayList<KRadical> data;	
 	
-	//HorzGridView stuff
 	private int columns;//Used to set childSize in TwoWayGridView
 	private int rows;//used with TwoWayGridView
 	private int itemPadding;
@@ -57,15 +53,11 @@ public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 	@SuppressLint("NewApi")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		//Get the data for the given position in the array
 		KRadical thisData = data.get(position);
 		ViewHandler handler;
-		//Use a viewHandler to improve performance
 		
-		//If reusing a view get the handler info; if view is null, create it
 		if(convertView == null){
 			
-			//Only get the inflater when it's needed, then release it-which isn't frequently
 			LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			convertView = inflater.inflate(R.layout.model_layout , parent, false);
 			handler = new ViewHandler();
@@ -84,20 +76,15 @@ public class HorzGridViewAdapter extends ArrayAdapter<KRadical>  {
 		
 		if(thisData.isOnFocus()){
 			if(thisData.isOnSelect()){
-				handler.rl.setBackgroundColor(Color.argb(255,0xef,0x7d,0x03)); //cam 
+				handler.rl.setBackgroundColor(Color.argb(255,0xef,0x7d,0x03)); 
 			}
 			else{
-				handler.rl.setBackgroundColor(Color.argb(255,0x00, 0xc8, 0x6f)); //xanh
+				handler.rl.setBackgroundColor(Color.argb(255,0x00, 0xc8, 0x6f)); 
 			}
 		}else{
-			handler.rl.setBackgroundColor(Color.argb(100,0x00, 0xab, 0x5d)); //xanh 50/255
+			handler.rl.setBackgroundColor(Color.argb(100,0x00, 0xab, 0x5d)); 
 		}
 		
-//		if(thisData.isHeader()){
-//			handler.tv.setText(String.valueOf(thisData.getNumStrokes()));
-//		}
-//		FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(columnWidth, rowHeight);// convertView.getLayoutParams();
-//		handler.tv.setLayoutParams(lp);
 		return convertView;
 	}
 	
